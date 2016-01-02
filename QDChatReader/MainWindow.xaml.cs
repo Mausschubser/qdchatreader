@@ -41,6 +41,7 @@ namespace QDChatReader
         {
             personGridView.ItemsSource = PersonTable.AsDataView();
             chatGridView.ItemsSource = ChatTable.AsDataView();
+            labelVersion.Content = ((App)Application.Current).Version;
         }
 
         private void UpdateChatTableFromNewRow(string newID)

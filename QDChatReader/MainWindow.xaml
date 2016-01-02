@@ -64,6 +64,6 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <Label x:Name="label" Content="{x:Static local:QDRessources.Version}" Grid.Column="2" Height="20" VerticalAlignment="Top" HorizontalContentAlignment="Right" ContentStringFormat="version {0}" Padding="2" HorizontalAlignment="Right" Width="120" FontSize="10.667" />
+        <Label x:Name="labelVersion" Content="0" Grid.Column="2" Height="20" VerticalAlignment="Top" HorizontalContentAlignment="Right" ContentStringFormat="version {0}" Padding="2" HorizontalAlignment="Right" Width="120" FontSize="10.667" />
     </Grid>
 </Window>
