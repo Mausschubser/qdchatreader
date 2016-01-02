@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace QDChatReader
         static QDChatPersons QDPersons = new QDChatPersons();
         DataTable PersonTable = new DataTable();
         DataTable ChatTable = new DataTable();
-        QDSerializer personSerializer = new QDSerializer(QDPersons, "persons2.xml");
+        QDSerializer personSerializer = new QDSerializer(QDPersons, "QDPersons.xml");
         private string selectedNameID= "";
 
         public MainWindow()
@@ -38,11 +39,7 @@ namespace QDChatReader
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitPersonTable(PersonTable);
-            QDPersons= personSerializer.DeserializeFromXML() as QDChatPersons;
-            FillPersonTable(PersonTable);
             personGridView.ItemsSource = PersonTable.AsDataView();
-            InitChatTable(ChatTable);
             chatGridView.ItemsSource = ChatTable.AsDataView();
         }
 
@@ -72,6 +69,10 @@ namespace QDChatReader
 
         private void FillChatTable(DataTable chatTable)
         {
+            if (chatTable.Columns.Count < 1)
+            {
+                InitChatTable(chatTable);
+            }
             chatTable.Clear();
             foreach (QDChatLine chatline in QDChat)
             {
@@ -97,6 +98,11 @@ namespace QDChatReader
 
         private void FillPersonTable(DataTable personTable)
         {
+
+            if (PersonTable.Columns.Count < 1)
+            {
+                InitPersonTable(PersonTable);
+            }
             personTable.Clear();
             foreach (QDChatPerson person in QDPersons.List)
             {
@@ -162,6 +168,10 @@ namespace QDChatReader
 
         private void UpdatePersons()
         {
+            if (QDPersons.List.Count==0)
+            {
+                QDPersons = personSerializer.DeserializeFromXML() as QDChatPersons;
+            }
             QDPersons.ReadFromChatList(QDChat);
             FillPersonTable(PersonTable);
             //QDPersons.SerializeToXML();

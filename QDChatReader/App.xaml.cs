@@ -13,7 +13,8 @@ namespace QDChatReader
     /// </summary>
     public partial class App : Application
     {
-        private QDChatReaderClass qdChatReader = new QDChatReaderClass();
+        private static QDChatReaderClass qdChatReader = new QDChatReaderClass();
+        private QDSerializer QDChatReaderSerializer = new QDSerializer(qdChatReader, "QDChatReader.xml");
 
         #region Getters and Setters
         public QDChatReaderClass QDChatReaderData
@@ -26,8 +27,21 @@ namespace QDChatReader
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             qdChatReader.Init();
+            qdChatReader = QDChatReaderSerializer.DeserializeFromXML() as QDChatReaderClass;
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            try
+            {
+                QDChatReaderSerializer.SerializeToXML();
+            }
+            finally
+            {
+                base.OnExit(e);
+            }
         }
     }
 }

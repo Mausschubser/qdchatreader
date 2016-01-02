@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -174,7 +175,41 @@ namespace QDChatReader
 
         private void buttonSaveAs_Click(object sender, RoutedEventArgs e)
         {
-
+            string newfilename;
+            string sourcefile = ((App)Application.Current).QDChatReaderData.SelectedDBFile;
+            
+            if (File.Exists(sourcefile))
+            {
+                FileInfo info = new FileInfo(sourcefile);
+                DateTime timestamp = info.CreationTime;
+                string timestring = timestamp.ToString("yyyy-MM-dd_HH-mm");
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "database files (*.db)|*.db|all files (*.*)|*.*";
+                saveFileDialog.DefaultExt = "*.db";
+                saveFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(((App)Application.Current).QDChatReaderData.ActiveDBFile);
+                saveFileDialog.FileName = System.IO.Path.GetFileNameWithoutExtension(sourcefile) + "_"+timestring+".db";
+                saveFileDialog.ValidateNames = false;
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    newfilename = saveFileDialog.FileName;
+                    if (File.Exists(newfilename))
+                    {
+                        //TODO: Overwrite?
+                    }
+                    try
+                    {
+                        File.Copy(sourcefile, newfilename,true);
+                        if (File.Exists(newfilename))
+                        {
+                            ((App)Application.Current).QDChatReaderData.ActiveDBFile = newfilename;
+                            this.Close();
+                        }
+                    }
+                    catch 
+                    {
+                    }
+                }
+            }
         }
 
         private void buttonCancelSeek_Click(object sender, RoutedEventArgs e)
