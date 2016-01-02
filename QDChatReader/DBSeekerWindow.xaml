@@ -1,0 +1,48 @@
+﻿<Window x:Class="QDChatReader.DBSeekerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QDChatReader"
+        mc:Ignorable="d"
+        Title="Database Search &amp; Scan" Height="320" Width="520">
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom" Height="20">
+            <StatusBarItem Height="20" VerticalAlignment="Bottom">
+                <TextBlock x:Name="toolStripStatusLabel" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="100*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="buttonRoot" Content="Search in..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Click="buttonRoot_Click"/>
+            <Button x:Name="buttonSeek" Content="Database Scan" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="buttonSeek_Click"/>
+            <Button x:Name="buttonSave" Content="Use selected" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100" Click="buttonSave_Click"/>
+            <Button x:Name="buttonRootReset" Content="iTunes default" Grid.Column="2" Height="20" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonRootReset_Click"/>
+            <Button x:Name="buttonCancelSeek" Content="Stop Scanning!" Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonCancelSeek_Click"/>
+            <Button x:Name="buttonSaveAs" Content="Save as..." Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonSaveAs_Click"/>
+            <Label x:Name="rootLabel" Content="{Binding Path=RootFolder}" Grid.Column="1" Height="33" Margin="10,7,10,0" VerticalAlignment="Top"/>
+            <ProgressBar x:Name="progressBarSeek" Grid.Column="1" Height="20" Margin="10,10,10,0" Grid.Row="1" VerticalAlignment="Top"/>
+            <DataGrid x:Name="gridViewFileList" ItemsSource="{Binding validFileTable}"  Grid.ColumnSpan="3" Margin="10" Grid.Row="3" GotFocus="gridViewFileList_GotFocus" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
+                    <DataGridTextColumn Header="MByte" Width="50" Binding="{Binding Size}" />
+                    <DataGridTextColumn Header="File" Width="*" Binding="{Binding File}" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+            <Label x:Name="labelDataBaseName" Content="{Binding Path=SelectedDBFile}" Grid.Column="1" Margin="10,7,10,0" Grid.Row="2" Height="33" VerticalAlignment="Top"/>
+        </Grid>
+
+    </DockPanel>
+</Window>
