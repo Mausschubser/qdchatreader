@@ -5,25 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QDChatReader"
         mc:Ignorable="d"
-        Title="QD Chat Reader" Height="480" Width="600" Loaded="Window_Loaded">
+        Title="QD Chat Reader" Height="640" MinHeight="640" Width="800" MinWidth="480" Loaded="Window_Loaded">
+
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="60*"/>
+            <RowDefinition Height="40*" MinHeight="150"/>
+            <RowDefinition Height="60*" MinHeight="250"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120" />
-            <ColumnDefinition Width="100*" MinWidth="200" />
+            <ColumnDefinition MinWidth="200" Width="100*" />
+            <ColumnDefinition Width="120"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="seekButton" Content="Scan iTunes..." HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Width="100" Click="seekButton_Click"/>
-        <Button x:Name="loadDbButton" Content="Select Chat DB..." HorizontalAlignment="Left" Margin="10,13,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="loadDbButton_Click"/>
-        <Button x:Name="button1" Content="Save Chat..." HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100" Click="saveButton_Click"/>
-        <Label x:Name="label1" Content="Seek iTunes DataBase" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="377"/>
-        <TextBox x:Name="fileNameLabel" Text="{Binding Path=ActiveDBFile }" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="377" Height="30" TextChanged="fileNameLabel_TextChanged"/>
-        <DataGrid x:Name="personGridView" ItemsSource="{Binding personTable}" Margin="10,10,0,10" Grid.Row="3" Grid.ColumnSpan="2" AutoGenerateColumns="False" GotFocus="personGridView_GotFocus" HorizontalAlignment="Left" SelectionChanged="personGridView_SelectionChanged" CellEditEnding="personGridView_CellEditEnding">
+        <Button x:Name="seekButton" Content="Scan Backup..." HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Width="100" Click="seekButton_Click" Height="20" Grid.Column="2" Grid.Row="1"/>
+        <Button x:Name="loadDbButton" Content="Select Chat DB..." HorizontalAlignment="Left" Margin="10,13,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="loadDbButton_Click" Height="20"/>
+        <Button x:Name="button1" Content="Save Chat..." Margin="10,10,10,0" Grid.Row="3" VerticalAlignment="Top" Click="saveButton_Click" Grid.Column="2" Height="20"/>
+        <TextBox x:Name="fileNameLabel" Text="{Binding Path=ActiveDBFile }" Grid.Column="1" Margin="10,10,10,0" Grid.Row="1" VerticalAlignment="Top" Height="30" TextChanged="fileNameLabel_TextChanged"/>
+        <DataGrid x:Name="personGridView" Margin="10,40,10,10" Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="False" GotFocus="personGridView_GotFocus" SelectionChanged="personGridView_SelectionChanged" CellEditEnding="personGridView_CellEditEnding" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="Auto" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
@@ -31,12 +31,39 @@
                 <DataGridTextColumn Header="#" Binding="{Binding Count}" />
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="chatGridView" ItemsSource="{Binding}" Margin="10" Grid.Row="4" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserSortColumns="False">
+        <DataGrid x:Name="chatGridView" ItemsSource="{Binding}" Margin="10,45,10,10" Grid.Row="3" Grid.ColumnSpan="3" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Datum" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
                 <DataGridTextColumn Header="&lt;&gt;" Width="50" Binding="{Binding Direction}" />
                 <DataGridTextColumn Header="Chat" Width="*" Binding="{Binding Chat}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Label x:Name="labelNameList" Content="Chat Partners:" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" Width="100" Height="30" VerticalAlignment="Top"/>
+        <Label x:Name="labelChatList" Grid.ColumnSpan="2" Content="{Binding Path=PersonSelected}" ContentStringFormat="Chat with {0}:" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="200"/>
+        <GridSplitter x:Name="gridSplitter" Height="5" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="10,0" HorizontalAlignment="Stretch"/>
+        <RichTextBox x:Name="richTextBox" Height="110" Margin="10,0" VerticalAlignment="Top" Grid.ColumnSpan="3" BorderThickness="0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run FontWeight="Bold" Text="QD Chat Reader"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run FontSize="10.667" Text="Reads the QD chat from a Chat DataBase. "/>
+                    <Run FontSize="10.667"/>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" FontSize="10.667" Text="1. "/>
+                    <Run FontSize="10.667" Text="Choose the database file with &quot;"/>
+                    <Run FontWeight="Bold" FontSize="10.667" Text="Select Chat DB..."/>
+                    <Run FontSize="10.667" Text="&quot; or let the computer search through the mobile phone back"/>
+                    <Run FontSize="10.667" Text="up"/>
+                    <Run FontSize="10.667" Text=" by &quot;"/>
+                    <Run FontWeight="Bold" FontSize="10.667" Text="Scan Backup..."/>
+                    <Run FontSize="10.667" Text="&quot;."/>
+                    <LineBreak/>
+                    <Run FontWeight="Bold" FontSize="10.667" Text="2. "/>
+                    <Run FontSize="10.667" Text="Click on the Chat Partner Name to select the chat. Change the number into the real or nick name to remember it."/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label x:Name="label" Content="{x:Static local:QDRessources.Version}" Grid.Column="2" Height="20" VerticalAlignment="Top" HorizontalContentAlignment="Right" ContentStringFormat="version {0}" Padding="2" HorizontalAlignment="Right" Width="120" FontSize="10.667" />
     </Grid>
 </Window>

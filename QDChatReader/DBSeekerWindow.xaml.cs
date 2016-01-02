@@ -199,22 +199,25 @@ namespace QDChatReader
             try
             {
                 int selectedRow = gridViewFileList.Items.IndexOf(gridViewFileList.CurrentItem);
-                DataRowView row = (DataRowView)gridViewFileList.CurrentItem;
-                string fileName = row["File"].ToString();
-                if (DBFilesList.GetValidFileByName(fileName) == 0)
+                if (gridViewFileList.CurrentItem!=null)
                 {
-                    ((App)Application.Current).QDChatReaderData.SelectedDBFile = DBFilesList.SelectedFile.name;
-                    Console.WriteLine("Datei gewählt: " + DBFilesList.SelectedFile.name);
+                    DataRowView row = (DataRowView)gridViewFileList.CurrentItem;
+                    string fileName = row["File"].ToString();
+                    if (DBFilesList.GetValidFileByName(fileName) == 0)
+                    {
+                        ((App)Application.Current).QDChatReaderData.SelectedDBFile = DBFilesList.SelectedFile.name;
+                        Console.WriteLine("Datei gewählt: " + DBFilesList.SelectedFile.name);
+                    }
+
                 }
 
             }
             catch (Exception)
             {
-
-                throw;
             }
         }
 
+ 
     }
 
 

@@ -59,8 +59,8 @@ namespace QDChatReader
         {
             string fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             fileName = fileName + "\\Apple Computer\\MobileSync";
-            fileName = "E:\\Temp\\Test";
-            fileName = "E:\\testQDchat";
+//            fileName = "E:\\Temp\\Test";
+//            fileName = "E:\\testQDchat";
             RootFolder=fileName;
         }
     }

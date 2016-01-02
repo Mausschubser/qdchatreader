@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QDChatReader"
         mc:Ignorable="d"
-        Title="Database Search &amp; Scan" Height="320" Width="520">
+        Title="Database Search &amp; Scan" Height="480" Width="640">
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom" Height="20">
             <StatusBarItem Height="20" VerticalAlignment="Bottom">
@@ -20,20 +20,21 @@
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="100*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="buttonRoot" Content="Search in..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Click="buttonRoot_Click"/>
-            <Button x:Name="buttonSeek" Content="Database Scan" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="buttonSeek_Click"/>
-            <Button x:Name="buttonSave" Content="Use selected" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100" Click="buttonSave_Click"/>
-            <Button x:Name="buttonRootReset" Content="iTunes default" Grid.Column="2" Height="20" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonRootReset_Click"/>
-            <Button x:Name="buttonCancelSeek" Content="Stop Scanning!" Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonCancelSeek_Click"/>
-            <Button x:Name="buttonSaveAs" Content="Save as..." Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonSaveAs_Click"/>
-            <Label x:Name="rootLabel" Content="{Binding Path=RootFolder}" Grid.Column="1" Height="33" Margin="10,7,10,0" VerticalAlignment="Top"/>
-            <ProgressBar x:Name="progressBarSeek" Grid.Column="1" Height="20" Margin="10,10,10,0" Grid.Row="1" VerticalAlignment="Top"/>
-            <DataGrid x:Name="gridViewFileList" ItemsSource="{Binding validFileTable}"  Grid.ColumnSpan="3" Margin="10" Grid.Row="3" GotFocus="gridViewFileList_GotFocus" AutoGenerateColumns="False">
+            <Button x:Name="buttonRoot" Content="Search in..." HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="100" Click="buttonRoot_Click" Grid.Row="1"/>
+            <Button x:Name="buttonSeek" Content="Database scan" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100" Click="buttonSeek_Click"/>
+            <Button x:Name="buttonSave" Content="Use selected" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="100" Click="buttonSave_Click"/>
+            <Button x:Name="buttonRootReset" Content="iTunes default" Grid.Column="2" Height="20" Margin="0,15,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonRootReset_Click" Grid.Row="1"/>
+            <Button x:Name="buttonCancelSeek" Content="Stop scanning!" Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonCancelSeek_Click"/>
+            <Button x:Name="buttonSaveAs" Content="Save as..." Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonSaveAs_Click"/>
+            <Label x:Name="rootLabel" Content="{Binding Path=RootFolder}" Grid.Column="1" Margin="10,10,10,0" Height="30" VerticalAlignment="Top" Grid.Row="1"/>
+            <ProgressBar x:Name="progressBarSeek" Grid.Column="1" Height="20" Margin="10,10,10,0" Grid.Row="2" VerticalAlignment="Top"/>
+            <DataGrid x:Name="gridViewFileList" ItemsSource="{Binding validFileTable}"  Grid.ColumnSpan="3" Margin="10" Grid.Row="4" GotFocus="gridViewFileList_GotFocus" AutoGenerateColumns="False" EnableRowVirtualization="False" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
                     <DataGridTextColumn Header="MByte" Width="50" Binding="{Binding Size}" />
@@ -41,7 +42,31 @@
                 </DataGrid.Columns>
 
             </DataGrid>
-            <Label x:Name="labelDataBaseName" Content="{Binding Path=SelectedDBFile}" Grid.Column="1" Margin="10,7,10,0" Grid.Row="2" Height="33" VerticalAlignment="Top"/>
+            <Label x:Name="labelDataBaseName" Content="{Binding Path=SelectedDBFile}" Grid.Column="1" Margin="10,7,10,0" Grid.Row="3" Height="33" VerticalAlignment="Top"/>
+            <RichTextBox x:Name="richTextBox" Height="60" Margin="10,10,10,0" VerticalAlignment="Top" Grid.ColumnSpan="3" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" BorderThickness="0">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run FontWeight="Bold" Text="Finding the QD Chat Database"/>
+                        <LineBreak/>
+                        <Run FontSize="10.667" Text="The QD Chat Database will be searched in the backup folder of your mobile phone. Make an "/>
+                        <Run FontSize="10.667" Text="non-"/>
+                        <Run FontSize="10.667" Text="encrypted backup first. Then let the &quot;"/>
+                        <Run FontWeight="Bold" FontSize="10.667" Text="Database scan"/>
+                        <Run FontSize="10.667" Text="&quot; find it in the backup folder. Pick a found database from the list and click on &quot;"/>
+                        <Run FontWeight="Bold" FontSize="10.667" Text="Use selected"/>
+                        <Run FontSize="10.667" Text="&quot;."/>
+                        <Run FontSize="10.667"/>
+                        <LineBreak/>
+                        <Run FontSize="10.667" Text="You may change the search location by &quot;"/>
+                        <Run FontWeight="Bold" FontSize="10.667" Text="Search in..."/>
+                        <Run FontSize="10.667" Text="&quot;"/>
+                        <Run FontWeight="Bold" FontSize="10.667" Text=" "/>
+                        <Run FontSize="10.667" Text="or reset it to the &quot;"/>
+                        <Run FontWeight="Bold" FontSize="10.667" Text="iTunes default"/>
+                        <Run FontSize="10.667" Text="&quot; backup folder."/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
         </Grid>
 
     </DockPanel>

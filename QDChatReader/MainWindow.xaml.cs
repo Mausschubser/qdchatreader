@@ -54,6 +54,7 @@ namespace QDChatReader
                 if (personindex >= 0)
                 {
                     QDPersons.Selected = QDPersons.List[personindex];
+                    ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
                     FillChatTable(ChatTable);
                 }
                 selectedNameID = newID;
@@ -65,7 +66,7 @@ namespace QDChatReader
         {
             chatTable.Columns.Add("Date");
             chatTable.Columns.Add("Direction");
-            chatTable.Columns.Add("Chat"); // , System.Type.GetType("System.String")
+            chatTable.Columns.Add("Chat"); 
             chatTable.Locale = System.Globalization.CultureInfo.InvariantCulture;
         }
 
@@ -147,6 +148,7 @@ namespace QDChatReader
             Console.WriteLine("Update Chats from new file: "+dbFileName);
             ReadDBFile(dbFileName);
             UpdatePersons();
+            ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
             UpdateDirections();
             FillChatTable(ChatTable);
         }
@@ -175,6 +177,7 @@ namespace QDChatReader
             {
                 string id = row["ID"].ToString();
                 string name = row["Name"].ToString();
+                ((App)Application.Current).QDChatReaderData.PersonSelected = name;
                 Console.WriteLine("Name gewählt:" + id+"="+name);
                 UpdateChatTableFromNewRow(id);
             }
@@ -198,9 +201,9 @@ namespace QDChatReader
                 {
                     string name = editedTextbox.Text;
                     QDPersons.List[personindex].name = name; ;
-                    //QDPersons.SerializeToXML();
                     personSerializer.SerializeToXML();
                     QDPersons.Selected = QDPersons.List[personindex];
+                    ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
                     FillChatTable(ChatTable);
                 }
             }
@@ -209,7 +212,7 @@ namespace QDChatReader
         private void seekButton_Click(object sender, RoutedEventArgs e)
         {
             DBSeekerWindow dbSeekerDlg = new DBSeekerWindow();
-            dbSeekerDlg.Show();
+            dbSeekerDlg.ShowDialog();
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
@@ -217,5 +220,6 @@ namespace QDChatReader
 
         }
 
+ 
     }
 }
