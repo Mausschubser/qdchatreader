@@ -236,44 +236,7 @@ namespace QDChatReader
         }
     }
 
-    public class QDChatComparer : IComparer<QDChatLine>
-    {
-        public int Compare(QDChatLine qdchatline1, QDChatLine qdchatline2)
-        {
-            double timeoffset1 = qdchatline1.timeoffset;
-            double timeoffset2 = qdchatline2.timeoffset;
-            if (timeoffset1 > timeoffset2)
-            {
-                return 1;
-            }
-            else if (timeoffset1 < timeoffset2)
-            {
-                return -1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-    }
 
-    public class QDChatLine
-    {
-        public string senderid = "";
-        public string receiverid = "";
-        public string chattext = "";
-        public double timeoffset = 0.0;
-        public DateTime timestamp;
-        public int chatdirection = IN;
 
-        private DateTime basetime = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        public const int IN = 0;
-        public const int OUT = 1;
 
-        public int ConvertRawField()
-        {
-            this.timestamp = basetime.AddSeconds(this.timeoffset);
-            return 0;
-        }
-    }
 }

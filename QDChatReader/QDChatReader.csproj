@@ -29,7 +29,7 @@
     <ProductName>QD Chat Reader</ProductName>
     <PublisherName>Mausschubser</PublisherName>
     <SuiteName>HimbeeryaSoft</SuiteName>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -115,7 +115,12 @@
     <Compile Include="DBSeekerWindow.xaml.cs">
       <DependentUpon>DBSeekerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileSizeConverter.cs" />
+    <Compile Include="QDChatComparer.cs" />
     <Compile Include="QDChatDB.cs" />
+    <Compile Include="QDChatLine.cs" />
+    <Compile Include="QDChatPerson.cs" />
+    <Compile Include="QDChatPersons.cs" />
     <Compile Include="QDChatReader.cs" />
     <Compile Include="QDRessources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QDChatReader"
         mc:Ignorable="d"
-        Title="Database Search &amp; Scan" Height="480" Width="640">
+        Title="Database Search &amp; Scan" Height="519.8" Width="640" MinWidth="600" MinHeight="480">
+    <Window.Resources>
+        <local:FileSizeConverter x:Key="filesizeconverter" />
+    </Window.Resources>
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom" Height="20">
             <StatusBarItem Height="20" VerticalAlignment="Bottom">
@@ -20,7 +23,7 @@
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
@@ -37,31 +40,40 @@
             <DataGrid x:Name="gridViewFileList" ItemsSource="{Binding validFileTable}"  Grid.ColumnSpan="3" Margin="10" Grid.Row="4" GotFocus="gridViewFileList_GotFocus" AutoGenerateColumns="False" EnableRowVirtualization="False" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
-                    <DataGridTextColumn Header="MByte" Width="50" Binding="{Binding Size}" />
-                    <DataGridTextColumn Header="File" Width="*" Binding="{Binding File}" />
+                    <DataGridTextColumn Header="Size" Width="50" Binding="{Binding Size, Converter={StaticResource filesizeconverter}}" />
+                    <DataGridTextColumn Header="File Name" Width="*" Binding="{Binding File}" />
                 </DataGrid.Columns>
 
             </DataGrid>
             <Label x:Name="labelDataBaseName" Content="{Binding Path=SelectedDBFile}" Grid.Column="1" Margin="10,7,10,0" Grid.Row="3" Height="33" VerticalAlignment="Top"/>
-            <RichTextBox x:Name="richTextBox" Height="60" Margin="10,10,10,0" VerticalAlignment="Top" Grid.ColumnSpan="3" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" BorderThickness="0">
+            <RichTextBox x:Name="richTextBox" Height="110" Margin="10,0" VerticalAlignment="Top" Grid.ColumnSpan="3" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" BorderThickness="0">
                 <FlowDocument>
                     <Paragraph>
-                        <Run FontWeight="Bold" Text="Finding the QD Chat Database"/>
+                        <Run FontWeight="Bold" FontSize="13.333" Text="Finding the QD Chat Database"/>
+                    </Paragraph>
+                    <Paragraph>
+                        <Run FontSize="10.667" Text="The QD Chat Database will be searched in the backup folder of your mobile phone. "/>
                         <LineBreak/>
-                        <Run FontSize="10.667" Text="The QD Chat Database will be searched in the backup folder of your mobile phone. Make an "/>
-                        <Run FontSize="10.667" Text="non-"/>
-                        <Run FontSize="10.667" Text="encrypted backup first. Then let the &quot;"/>
+                        <Run FontWeight="Bold" FontSize="10.667" Text="1. "/>
+                        <Run FontSize="10.667" Text="Make an non-encrypted backup in iTunes. "/>
+                        <LineBreak/>
+                        <Run FontWeight="Bold" FontSize="10.667" Text="2. "/>
+                        <Run FontSize="10.667" Text="Let the &quot;"/>
                         <Run FontWeight="Bold" FontSize="10.667" Text="Database scan"/>
-                        <Run FontSize="10.667" Text="&quot; find it in the backup folder. Pick a found database from the list and click on &quot;"/>
+                        <Run FontSize="10.667" Text="&quot; find it in the backup folder. "/>
+                        <LineBreak/>
+                        <Run FontWeight="Bold" FontSize="10.667" Text="3. "/>
+                        <Run FontSize="10.667" Text="Pick a found database from the list and click on &quot;"/>
                         <Run FontWeight="Bold" FontSize="10.667" Text="Use selected"/>
                         <Run FontSize="10.667" Text="&quot;."/>
-                        <Run FontSize="10.667"/>
+                        <Run FontSize="10.667" Text=" Or store it under a new name with &quot;"/>
+                        <Run FontWeight="Bold" FontSize="10.667" Text="Save as..."/>
+                        <Run FontSize="10.667" Text="&quot;."/>
                         <LineBreak/>
                         <Run FontSize="10.667" Text="You may change the search location by &quot;"/>
                         <Run FontWeight="Bold" FontSize="10.667" Text="Search in..."/>
                         <Run FontSize="10.667" Text="&quot;"/>
-                        <Run FontWeight="Bold" FontSize="10.667" Text=" "/>
-                        <Run FontSize="10.667" Text="or reset it to the &quot;"/>
+                        <Run FontSize="10.667" Text=" or reset it to the &quot;"/>
                         <Run FontWeight="Bold" FontSize="10.667" Text="iTunes default"/>
                         <Run FontSize="10.667" Text="&quot; backup folder."/>
                     </Paragraph>
