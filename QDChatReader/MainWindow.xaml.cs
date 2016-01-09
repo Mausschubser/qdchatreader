@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,10 +25,10 @@ namespace QDChatReader
     public partial class MainWindow : Window
     {
         QDChatDB qddb = new QDChatDB();
-        List<QDChatLine> QDChat = new List<QDChatLine>();
+        QDChatList QDChat = new QDChatList();
         static QDChatPersons QDPersons = new QDChatPersons();
-        DataTable PersonTable = new DataTable();
-        DataTable ChatTable = new DataTable();
+        QDPersonDataTable PersonTable = new QDPersonDataTable();
+        QDChatDataTable ChatTable = new QDChatDataTable();
         QDSerializer personSerializer = new QDSerializer(QDPersons, "QDPersons.xml");
         private string selectedNameID= "";
 
@@ -53,69 +54,9 @@ namespace QDChatReader
                 {
                     QDPersons.Selected = QDPersons.List[personindex];
                     ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
-                    FillChatTable(ChatTable);
+                    ChatTable.FillFromChatByPerson(QDChat, QDPersons);
                 }
                 selectedNameID = newID;
-            }
-        }
-
-
-        private void InitChatTable(DataTable chatTable)
-        {
-            chatTable.Columns.Add("Date");
-            chatTable.Columns.Add("Direction");
-            chatTable.Columns.Add("Chat"); 
-            chatTable.Locale = System.Globalization.CultureInfo.InvariantCulture;
-        }
-
-        private void FillChatTable(DataTable chatTable)
-        {
-            if (chatTable.Columns.Count < 1)
-            {
-                InitChatTable(chatTable);
-            }
-            chatTable.Clear();
-            foreach (QDChatLine chatline in QDChat)
-            {
-                if (chatline.receiverid == QDPersons.Selected.id || chatline.senderid == QDPersons.Selected.id)
-                {
-                    DataRow workRow = chatTable.NewRow();
-                    workRow["Date"] = chatline.timestamp.ToString();
-                    workRow["Direction"] = ((chatline.chatdirection == 1) ? "<" : ">");
-                    workRow["Chat"] = chatline.chattext;
-                    chatTable.Rows.Add(workRow);
-                }
-            }
-        }
-
-        private void InitPersonTable(DataTable personTable)
-        {
-            personTable.Columns.Add("ID");
-            personTable.Columns.Add("Name");
-            personTable.Columns.Add("1stContact", System.Type.GetType("System.DateTime"));
-            personTable.Columns.Add("Count", System.Type.GetType("System.Int32"));
-            personTable.Locale = System.Globalization.CultureInfo.InvariantCulture;
-        }
-
-        private void FillPersonTable(DataTable personTable)
-        {
-
-            if (PersonTable.Columns.Count < 1)
-            {
-                InitPersonTable(PersonTable);
-            }
-            personTable.Clear();
-            foreach (QDChatPerson person in QDPersons.List)
-            {
-                DataRow personRow = personTable.NewRow();
-                if (!person.isMe)
-                {
-                    personRow["ID"] = person.id;
-                    personRow["Name"] = person.name;
-                    personRow["1stContact"] = person.firstAppearance;
-                    personRow["Count"] = person.count;
-                    personTable.Rows.Add(personRow);
-                }
             }
         }
 
@@ -134,7 +75,7 @@ namespace QDChatReader
         private void loadDbButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openDBFileDialog = new OpenFileDialog();
-            openDBFileDialog.Filter = "all (*.*)|*.*|DBs (*.db)|*.db";
+            openDBFileDialog.Filter = "DataBase files (*.db)|*.db|all files (*.*)|*.*";
             openDBFileDialog.InitialDirectory = ((App)Application.Current).QDChatReaderData.ActiveDBFile;
             if (openDBFileDialog.ShowDialog() == true)
             {
@@ -157,7 +98,7 @@ namespace QDChatReader
             UpdatePersons();
             ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
             UpdateDirections();
-            FillChatTable(ChatTable);
+            ChatTable.FillFromChatByPerson(QDChat, QDPersons);
         }
 
         private void ReadDBFile(string filename)
@@ -174,8 +115,7 @@ namespace QDChatReader
                 QDPersons = personSerializer.DeserializeFromXML() as QDChatPersons;
             }
             QDPersons.ReadFromChatList(QDChat);
-            FillPersonTable(PersonTable);
-            //QDPersons.SerializeToXML();
+            PersonTable.Fill(QDPersons);
             personSerializer.SerializeToXML();
 
         }
@@ -215,7 +155,7 @@ namespace QDChatReader
                     personSerializer.SerializeToXML();
                     QDPersons.Selected = QDPersons.List[personindex];
                     ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
-                    FillChatTable(ChatTable);
+                    ChatTable.FillFromChatByPerson(QDChat, QDPersons);
                 }
             }
         }
@@ -228,9 +168,36 @@ namespace QDChatReader
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if(ChatTable.Rows.Count>0)
+            {
+                string newfilename;
+                string chatpartner = ((App)Application.Current).QDChatReaderData.PersonSelected;
+                string allowedchars = "a-zA-Z0-9äÄöÖüÜß +&";//allowed characters for the filename derived from chat partner's name
+                Regex r = new Regex("[^"+allowedchars+"]"); //regular expression to exclude these characters form beeing removed
+                chatpartner = r.Replace(chatpartner,"");    //remove all characters NOT listed above
+                Console.WriteLine("name="+chatpartner);
+                chatpartner =chatpartner.Trim(System.IO.Path.GetInvalidFileNameChars());
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "text (*.txt)|*.txt|Excel (*.xlsx)|*.xlsx|all files (*.*)|*.*";
+                saveFileDialog.DefaultExt = "*.txt";
+                saveFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(((App)Application.Current).QDChatReaderData.ActiveDBFile);
+                saveFileDialog.FileName = "QDChat "+chatpartner+".txt";
+                //saveFileDialog.ValidateNames = false;
+                //saveFileDialog.CheckFileExists = true;
+                //saveFileDialog.CreatePrompt = true;
+                saveFileDialog.OverwritePrompt = true;
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    newfilename = saveFileDialog.FileName;
+                    try
+                    {
+                        QDChat.WriteChatOfPerson(newfilename,QDPersons.Selected);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
         }
-
- 
     }
 }

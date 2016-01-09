@@ -50,14 +50,12 @@ namespace QDChatReader
         {
             try
             {
-                //Erstelle einen XML-Serialisierer für Objekte vom Typ Blog
+                //Erstelle einen XML-Serialisierer für Objekte vom Typ des übergebenen Objects
                 XmlSerializer serializer = new XmlSerializer(theObject.GetType());
 
-                //Erstelle einen FileStream auf die Datei, in die unserer
-                //Blog-Objekt in XML-Form gespeichert werden soll.
+                //Erstelle einen FileStream auf die Datei, in die das Objekt als XML-Datei gespeichert werden soll.
                 FileStream file = new FileStream(fullFileName, FileMode.Create);
-                //Serialisiere das übergebene Objekt (toBeSerialized)
-                //und schreibe es in den FileStream.
+                //Serialisiere das übergebene Objekt und schreibe es in den FileStream.
                 serializer.Serialize(file, theObject);
 
                 //Schließe die XML-Datei.
