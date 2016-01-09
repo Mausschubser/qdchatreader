@@ -35,8 +35,8 @@ namespace QDChatReader
         {
             System.Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             Version=String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
-            qdChatReader.Init();
             qdChatReader = QDChatReaderSerializer.DeserializeFromXML() as QDChatReaderClass;
+            qdChatReader.Init();
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
         }

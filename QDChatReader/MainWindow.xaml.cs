@@ -76,7 +76,7 @@ namespace QDChatReader
         {
             OpenFileDialog openDBFileDialog = new OpenFileDialog();
             openDBFileDialog.Filter = "DataBase files (*.db)|*.db|all files (*.*)|*.*";
-            openDBFileDialog.InitialDirectory = ((App)Application.Current).QDChatReaderData.ActiveDBFile;
+            openDBFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(((App)Application.Current).QDChatReaderData.ActiveDBFile);
             if (openDBFileDialog.ShowDialog() == true)
             {
                 string dbFileName = openDBFileDialog.FileName;
@@ -180,7 +180,7 @@ namespace QDChatReader
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "text (*.txt)|*.txt|Excel (*.xlsx)|*.xlsx|all files (*.*)|*.*";
                 saveFileDialog.DefaultExt = "*.txt";
-                saveFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(((App)Application.Current).QDChatReaderData.ActiveDBFile);
+                saveFileDialog.InitialDirectory = ((App)Application.Current).QDChatReaderData.ExportFolder;
                 saveFileDialog.FileName = "QDChat "+chatpartner+".txt";
                 //saveFileDialog.ValidateNames = false;
                 //saveFileDialog.CheckFileExists = true;
@@ -192,6 +192,7 @@ namespace QDChatReader
                     try
                     {
                         QDChat.WriteChatOfPerson(newfilename,QDPersons.Selected);
+                        ((App)Application.Current).QDChatReaderData.ExportFolder=System.IO.Path.GetDirectoryName(newfilename);
                     }
                     catch
                     {

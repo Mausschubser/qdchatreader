@@ -29,8 +29,8 @@
     <ProductName>QD Chat Reader</ProductName>
     <PublisherName>Mausschubser</PublisherName>
     <SuiteName>HimbeeryaSoft</SuiteName>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

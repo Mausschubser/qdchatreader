@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace QDChatReader
         private string rootFolder;
         private string selectedDBFile;
         private string activeDBFile;
+        private string exportFolder;
 
         #region Properties Getters and Setters
         public string PersonSelected
@@ -26,11 +28,19 @@ namespace QDChatReader
             get { return rootFolder; }
             set { rootFolder = value; OnPropertyChanged("RootFolder"); }
         }
+
+        public string ExportFolder
+        {
+            get { return exportFolder; }
+            set { exportFolder = value; OnPropertyChanged("ExportFolder"); }
+        }
+
         public string SelectedDBFile
         {
             get { return selectedDBFile; }
             set { selectedDBFile = value; OnPropertyChanged("SelectedDBFile"); }
         }
+
         public string ActiveDBFile
         {
             get { return activeDBFile; }
@@ -53,15 +63,25 @@ namespace QDChatReader
         public void Init()
         {
             SetDefaultRootFolder();
+            SetDefaultExportFolder();
         }
 
         public void SetDefaultRootFolder()
         {
-            string fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            fileName = fileName + "\\Apple Computer\\MobileSync";
-//            fileName = "E:\\Temp\\Test";
-//            fileName = "E:\\testQDchat";
-            RootFolder=fileName;
+            if (!Directory.Exists(RootFolder))
+            {
+                string fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                fileName = fileName + "\\Apple Computer\\MobileSync";
+                RootFolder = fileName;
+            }
+        }
+
+        public void SetDefaultExportFolder()
+        {
+            if (!Directory.Exists(ExportFolder))
+            {
+                ExportFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
         }
     }
 }
