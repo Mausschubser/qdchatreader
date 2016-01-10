@@ -51,10 +51,10 @@ namespace QDChatReader
         {
             if (newID != selectedNameID)
             {
-                int personindex = QDPersons.List.FindIndex(x => x.id == newID);
+                int personindex = QDPersons.GetPersonIndexFromId(newID);
                 if (personindex >= 0)
                 {
-                    QDPersons.Selected = QDPersons.List[personindex];
+                    QDPersons.SetSelectedPerson(personindex);
                     ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
                     ChatTable.FillFromChatByPerson(QDChat, QDPersons);
                 }
@@ -130,9 +130,14 @@ namespace QDChatReader
             {
                 string id = row["ID"].ToString();
                 string name = row["Name"].ToString();
-                ((App)Application.Current).QDChatReaderData.PersonSelected = name;
-                Console.WriteLine("Name gewählt:" + id+"="+name);
-                UpdateChatTableFromNewRow(id);
+                int personindex = QDPersons.GetPersonIndexFromId(id);
+                if (personindex!=QDChatPersons.INDEXNOTFOUND)
+                {
+                    QDPersons.SetSelectedPerson(personindex);
+                    ((App)Application.Current).QDChatReaderData.PersonSelected = name;
+                    Console.WriteLine("Name gewählt:" + id + "=" + name);
+                    UpdateChatTableFromNewRow(id);
+                }
             }
         }
 
@@ -141,30 +146,14 @@ namespace QDChatReader
 
         }
 
-        private void personGridView_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        private QDChatPerson ChangePersonName(string id, string name)
         {
-            var editedTextbox = e.EditingElement as TextBox;
-            string colheader = personGridView.CurrentColumn.Header.ToString();
-            DataRowView row = (DataRowView)personGridView.SelectedItems[0];
-            if (row != null && editedTextbox != null && (colheader == "Name")) //Eingabe in ein mögliches Namensfeld
+            QDChatPerson foundPerson = QDPersons.ChangePersonName(id, name);
+            if (foundPerson.id!="")
             {
-                string id = row["ID"].ToString();
-                string name = editedTextbox.Text;
-                ChangePersonName(id, name);
-                ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
-                ChatTable.FillFromChatByPerson(QDChat, QDPersons);
-            }
-        }
-
-        private void ChangePersonName(string id, string name)
-        {
-            int personindex = QDPersons.List.FindIndex(x => x.id == id);
-            if (personindex >= 0)
-            {
-                QDPersons.List[personindex].name = name; ;
                 personSerializer.SerializeToXML();
-                //QDPersons.Selected = QDPersons.List[personindex];
             }
+            return foundPerson;
         }
 
         private void seekButton_Click(object sender, RoutedEventArgs e)
@@ -208,16 +197,28 @@ namespace QDChatReader
             }
         }
         
-
         void QDChatReaderData_Changed(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName=="MyName")
+            if (e.PropertyName=="MyName")   //Anwender hat einen neuen Namen eingegeben
             {
                 string myNewName = ((App)Application.Current).QDChatReaderData.MyName;
                 string id = QDPersons.Me.id;
                 QDPersons.Me.name = myNewName;
                 ChangePersonName(id, myNewName);
-                Console.WriteLine("Name geändert: " + myNewName);
+                Console.WriteLine("mein Name geändert: " + myNewName);
+            }
+
+            if (e.PropertyName=="PersonSelected") //Anwender will evtl.Namen der Chatperson verändert
+            {
+                string oldname = QDPersons.Selected.name;
+                string newName = ((App)Application.Current).QDChatReaderData.PersonSelected;
+                if (newName!= oldname)  //erkenne, dass der Name der Selektierten Person geändert wird
+                {
+                    string id = QDPersons.Selected.id;  //die id der bisher selektierten Person
+                    ChangePersonName(id, newName);    //bekommt den neuen Namen
+                    UpdatePersons();
+                    Console.WriteLine("Name des Chat-Partners ist geändert worden: " +oldname + " --> "+ newName);
+                }
             }
         }
     }
