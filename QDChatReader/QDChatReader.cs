@@ -10,11 +10,12 @@ namespace QDChatReader
 {
     public class QDChatReaderClass : INotifyPropertyChanged
     {
-        private string personSelected;
-        private string rootFolder;
-        private string selectedDBFile;
-        private string activeDBFile;
-        private string exportFolder;
+        private string personSelected="";
+        private string rootFolder="";
+        private string selectedDBFile="";
+        private string activeDBFile="";
+        private string exportFolder="";
+        private string myName="";
 
         #region Properties Getters and Setters
         public string PersonSelected
@@ -46,6 +47,13 @@ namespace QDChatReader
             get { return activeDBFile; }
             set { activeDBFile = value; OnPropertyChanged("ActiveDBFile"); }
         }
+
+        public string MyName
+        {
+            get { return myName; }
+            set { myName = value; OnPropertyChanged("MyName"); }
+        }
+
         #endregion
 
         #region Eventhandler
@@ -64,6 +72,7 @@ namespace QDChatReader
         {
             SetDefaultRootFolder();
             SetDefaultExportFolder();
+            SetDefaultMyName();
         }
 
         public void SetDefaultRootFolder()
@@ -81,6 +90,14 @@ namespace QDChatReader
             if (!Directory.Exists(ExportFolder))
             {
                 ExportFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
+        }
+
+        public void SetDefaultMyName()
+        {
+            if(MyName=="")
+            {
+                MyName = "me";
             }
         }
     }

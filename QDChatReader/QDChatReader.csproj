@@ -29,7 +29,7 @@
     <ProductName>QD Chat Reader</ProductName>
     <PublisherName>Mausschubser</PublisherName>
     <SuiteName>HimbeeryaSoft</SuiteName>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -91,7 +91,7 @@
     <StartupObject>QDChatReader.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>QDC3_128.ico</ApplicationIcon>
+    <ApplicationIcon>QDChatReader.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -213,7 +213,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="QDC3_128.ico" />
+    <Resource Include="QDChatReader.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\QDChatReader_64.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\QDChatReader_32.ico" />
+    <Resource Include="Icons\QDChatReader_48.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

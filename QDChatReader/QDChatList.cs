@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace QDChatReader
 {
@@ -26,6 +23,7 @@ namespace QDChatReader
 
         private void WriteTxtFile(string targetfile,QDChatPerson qdperson)
         {
+            string me = ((App)Application.Current).QDChatReaderData.MyName;
             FileStream file = null;
             string tempfile = Path.GetTempPath() + "qdchat.txt"; // GetTempFileName();
             try
@@ -39,7 +37,7 @@ namespace QDChatReader
                         {
                             string workRow = "";
                             workRow += chatline.timestamp.ToString();
-                            workRow += "\t"+((chatline.chatdirection == 1) ? "me:" : qdperson.name+":");
+                            workRow += "\t"+((chatline.chatdirection == 1) ? me: qdperson.name) + ":";
                             workRow += "\t"+chatline.chattext;
                             writer.WriteLine(workRow);
                         }

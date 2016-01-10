@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace QDChatReader
         {
             InitializeComponent();
             this.DataContext = ((App)Application.Current).QDChatReaderData;
+            ((App)Application.Current).QDChatReaderData.PropertyChanged += QDChatReaderData_Changed;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -147,16 +149,21 @@ namespace QDChatReader
             if (row != null && editedTextbox != null && (colheader == "Name")) //Eingabe in ein mögliches Namensfeld
             {
                 string id = row["ID"].ToString();
-                int personindex = QDPersons.List.FindIndex(x => x.id == id);
-                if (personindex >= 0)
-                {
-                    string name = editedTextbox.Text;
-                    QDPersons.List[personindex].name = name; ;
-                    personSerializer.SerializeToXML();
-                    QDPersons.Selected = QDPersons.List[personindex];
-                    ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
-                    ChatTable.FillFromChatByPerson(QDChat, QDPersons);
-                }
+                string name = editedTextbox.Text;
+                ChangePersonName(id, name);
+                ((App)Application.Current).QDChatReaderData.PersonSelected = QDPersons.Selected.name;
+                ChatTable.FillFromChatByPerson(QDChat, QDPersons);
+            }
+        }
+
+        private void ChangePersonName(string id, string name)
+        {
+            int personindex = QDPersons.List.FindIndex(x => x.id == id);
+            if (personindex >= 0)
+            {
+                QDPersons.List[personindex].name = name; ;
+                personSerializer.SerializeToXML();
+                //QDPersons.Selected = QDPersons.List[personindex];
             }
         }
 
@@ -198,6 +205,19 @@ namespace QDChatReader
                     {
                     }
                 }
+            }
+        }
+        
+
+        void QDChatReaderData_Changed(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName=="MyName")
+            {
+                string myNewName = ((App)Application.Current).QDChatReaderData.MyName;
+                string id = QDPersons.Me.id;
+                QDPersons.Me.name = myNewName;
+                ChangePersonName(id, myNewName);
+                Console.WriteLine("Name geändert: " + myNewName);
             }
         }
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QDChatReader"
         mc:Ignorable="d"
-        Title="Database Search &amp; Scan" Height="519.8" Width="640" MinWidth="600" MinHeight="480">
+        Title="Database Search &amp; Scan" Height="519.8" Width="640" MinWidth="600" MinHeight="480" Icon="QDChatReader.ico">
     <Window.Resources>
         <local:FileSizeConverter x:Key="filesizeconverter" />
     </Window.Resources>
@@ -39,14 +39,14 @@
             <ProgressBar x:Name="progressBarSeek" Grid.Column="1" Height="20" Margin="10,10,10,0" Grid.Row="2" VerticalAlignment="Top"/>
             <DataGrid x:Name="gridViewFileList" ItemsSource="{Binding validFileTable}"  Grid.ColumnSpan="3" Margin="10" Grid.Row="4" GotFocus="gridViewFileList_GotFocus" AutoGenerateColumns="False" EnableRowVirtualization="False" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Date" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
-                    <DataGridTextColumn Header="Size" Width="50" Binding="{Binding Size, Converter={StaticResource filesizeconverter}}" />
-                    <DataGridTextColumn Header="File Name" Width="*" Binding="{Binding File}" />
+                    <DataGridTextColumn Header="Date" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Size" Width="50" Binding="{Binding Size, Converter={StaticResource filesizeconverter}}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="File Name" Width="*" Binding="{Binding File}" IsReadOnly="True" />
                 </DataGrid.Columns>
 
             </DataGrid>
             <Label x:Name="labelDataBaseName" Content="{Binding Path=SelectedDBFile}" Grid.Column="1" Margin="10,7,10,0" Grid.Row="3" Height="33" VerticalAlignment="Top"/>
-            <RichTextBox x:Name="richTextBox" Height="110" Margin="10,0" VerticalAlignment="Top" Grid.ColumnSpan="3" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" BorderThickness="0">
+            <RichTextBox x:Name="richTextBox" Height="110" Margin="10,0,52,0" VerticalAlignment="Top" Grid.ColumnSpan="3" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" BorderThickness="0">
                 <FlowDocument>
                     <Paragraph>
                         <Run FontWeight="Bold" FontSize="13.333" Text="Finding the QD Chat Database"/>
@@ -79,6 +79,7 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
+            <Image x:Name="image" Grid.Column="2" Height="32" VerticalAlignment="Top" Source="Icons/QDChatReader_32.ico" HorizontalAlignment="Right" Width="32"/>
         </Grid>
 
     </DockPanel>
