@@ -77,7 +77,7 @@ namespace QDChatReader
 
         public void Init()
         {
-            SetDefaultRootFolder();
+            InitDefaultRootFolder();
             SetDefaultExportFolder();
             SetDefaultMyName();
             SetDefaultSelectedDBFile();
@@ -85,11 +85,16 @@ namespace QDChatReader
 
         public void SetDefaultRootFolder()
         {
+            string fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            fileName = fileName + "\\Apple Computer\\MobileSync";
+            RootFolder = fileName;
+        }
+
+        public void InitDefaultRootFolder()
+        {
             if (!Directory.Exists(RootFolder))
             {
-                string fileName = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                fileName = fileName + "\\Apple Computer\\MobileSync";
-                RootFolder = fileName;
+                SetDefaultRootFolder();
             }
         }
 
