@@ -3,11 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:QDChatReader.Properties"
         xmlns:local="clr-namespace:QDChatReader"
         mc:Ignorable="d"
-        Title="Database Search &amp; Scan" Height="519.8" Width="640" MinWidth="600" MinHeight="480" Icon="QDChatReader.ico">
+        Title="{x:Static p:Resources.DBS_WindowTitle}" Height="520" Width="800" MinWidth="760" MinHeight="480" Icon="QDChatReader.ico">
     <Window.Resources>
-        <local:FileSizeConverter x:Key="filesizeconverter" />
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="DictionaryFlowDocs.xaml"></ResourceDictionary>
+                </ResourceDictionary.MergedDictionaries>
+            <local:FileSizeConverter x:Key="filesizeconverter" />
+        </ResourceDictionary>
     </Window.Resources>
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom" Height="20">
@@ -29,55 +35,24 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="100*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="buttonRoot" Content="Search in..." HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="100" Click="buttonRoot_Click" Grid.Row="1"/>
-            <Button x:Name="buttonSeek" Content="Database scan" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100" Click="buttonSeek_Click"/>
-            <Button x:Name="buttonSave" Content="Use selected" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="100" Click="buttonSave_Click"/>
-            <Button x:Name="buttonRootReset" Content="iTunes default" Grid.Column="2" Height="20" Margin="0,15,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonRootReset_Click" Grid.Row="1"/>
-            <Button x:Name="buttonCancelSeek" Content="Stop scanning!" Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonCancelSeek_Click"/>
-            <Button x:Name="buttonSaveAs" Content="Save as..." Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonSaveAs_Click"/>
+            <Button x:Name="buttonRoot" Content="{x:Static p:Resources.DBS_ButtonRoot}" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="100" Click="buttonRoot_Click" Grid.Row="1"/>
+            <Button x:Name="buttonSeek" Content="{x:Static p:Resources.DBS_ButtonSeek}" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100" Click="buttonSeek_Click"/>
+            <Button x:Name="buttonSave" Content="{x:Static p:Resources.DBS_ButtonSave}" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="100" Click="buttonSave_Click"/>
+            <Button x:Name="buttonRootReset" Content="{x:Static p:Resources.DBS_ButtonRootReset}" Grid.Column="2" Height="20" Margin="0,15,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonRootReset_Click" Grid.Row="1"/>
+            <Button x:Name="buttonCancelSeek" Content="{x:Static p:Resources.DBS_ButtonCancelSeek}" Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonCancelSeek_Click"/>
+            <Button x:Name="buttonSaveAs" Content="{x:Static p:Resources.DBS_ButtonSaveAs}" Grid.Column="2" Height="20" Margin="0,10,10,0" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Click="buttonSaveAs_Click"/>
             <Label x:Name="rootLabel" Content="{Binding Path=RootFolder}" Grid.Column="1" Margin="10,10,10,0" Height="30" VerticalAlignment="Top" Grid.Row="1"/>
             <ProgressBar x:Name="progressBarSeek" Grid.Column="1" Height="20" Margin="10,10,10,0" Grid.Row="2" VerticalAlignment="Top"/>
             <DataGrid x:Name="gridViewFileList" ItemsSource="{Binding validFileTable}"  Grid.ColumnSpan="3" Margin="10" Grid.Row="4" GotFocus="gridViewFileList_GotFocus" AutoGenerateColumns="False" EnableRowVirtualization="False" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Date" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Size" Width="50" Binding="{Binding Size, Converter={StaticResource filesizeconverter}}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="File Name" Width="*" Binding="{Binding File}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="{x:Static p:Resources.DBS_TabColDate}" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="{x:Static p:Resources.DBS_TabColSize}" Width="50" Binding="{Binding Size, Converter={StaticResource filesizeconverter}}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="{x:Static p:Resources.DBS_TabColFileName}" Width="*" Binding="{Binding File}" IsReadOnly="True" />
                 </DataGrid.Columns>
 
             </DataGrid>
             <Label x:Name="labelDataBaseName" Content="{Binding Path=SelectedDBFile}" Grid.Column="1" Margin="10,7,10,0" Grid.Row="3" Height="33" VerticalAlignment="Top"/>
-            <RichTextBox x:Name="richTextBox" Height="110" Margin="10,0,52,0" VerticalAlignment="Top" Grid.ColumnSpan="3" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" BorderThickness="0">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run FontWeight="Bold" FontSize="13.333" Text="Finding the QD Chat Database"/>
-                    </Paragraph>
-                    <Paragraph>
-                        <Run FontSize="10.667" Text="The QD Chat Database will be searched in the backup folder of your mobile phone. "/>
-                        <LineBreak/>
-                        <Run FontWeight="Bold" FontSize="10.667" Text="1. "/>
-                        <Run FontSize="10.667" Text="Make an non-encrypted backup in iTunes. "/>
-                        <LineBreak/>
-                        <Run FontWeight="Bold" FontSize="10.667" Text="2. "/>
-                        <Run FontSize="10.667" Text="Let the &quot;"/>
-                        <Run FontWeight="Bold" FontSize="10.667" Text="Database scan"/>
-                        <Run FontSize="10.667" Text="&quot; find it in the backup folder. "/>
-                        <LineBreak/>
-                        <Run FontWeight="Bold" FontSize="10.667" Text="3. "/>
-                        <Run FontSize="10.667" Text="Pick a found database from the list and click on &quot;"/>
-                        <Run FontWeight="Bold" FontSize="10.667" Text="Use selected"/>
-                        <Run FontSize="10.667" Text="&quot;."/>
-                        <Run FontSize="10.667" Text=" Or store it under a new name with &quot;"/>
-                        <Run FontWeight="Bold" FontSize="10.667" Text="Save as..."/>
-                        <Run FontSize="10.667" Text="&quot;."/>
-                        <LineBreak/>
-                        <Run FontSize="10.667" Text="You may change the search location by &quot;"/>
-                        <Run FontWeight="Bold" FontSize="10.667" Text="Search in..."/>
-                        <Run FontSize="10.667" Text="&quot;"/>
-                        <Run FontSize="10.667" Text=" or reset it to the &quot;"/>
-                        <Run FontWeight="Bold" FontSize="10.667" Text="iTunes default"/>
-                        <Run FontSize="10.667" Text="&quot; backup folder."/>
-                    </Paragraph>
-                </FlowDocument>
+            <RichTextBox x:Name="richTextBox" Document="{StaticResource ResourceKey={x:Static p:Resources.DBS_RichTextBox}}" Height="110" Margin="10,0,52,0" VerticalAlignment="Top" Grid.ColumnSpan="3" AllowDrop="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False" BorderThickness="0">
             </RichTextBox>
             <Image x:Name="image" Grid.Column="2" Height="32" VerticalAlignment="Top" Source="Icons/QDChatReader_32.ico" HorizontalAlignment="Right" Width="32"/>
         </Grid>

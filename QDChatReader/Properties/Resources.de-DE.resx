@@ -118,67 +118,67 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DBS_ButtonCancelSeek" xml:space="preserve">
-    <value>Stop scanning!</value>
+    <value>Stopp Scan!</value>
   </data>
   <data name="DBS_ButtonRoot" xml:space="preserve">
-    <value>Search In...</value>
+    <value>Suche in...</value>
   </data>
   <data name="DBS_ButtonRootReset" xml:space="preserve">
-    <value>iTunes default</value>
+    <value>iTunes Standard</value>
   </data>
   <data name="DBS_ButtonSave" xml:space="preserve">
-    <value>Use selected</value>
+    <value>Verwende diese</value>
   </data>
   <data name="DBS_ButtonSaveAs" xml:space="preserve">
-    <value>Save as...</value>
+    <value>Speichere unter...</value>
   </data>
   <data name="DBS_ButtonSeek" xml:space="preserve">
-    <value>Database scan</value>
+    <value>Datenbank Scan</value>
   </data>
   <data name="DBS_RichTextBox" xml:space="preserve">
-    <value>DBSeekerWindow</value>
+    <value>DBSeekerWindow.de-DE</value>
   </data>
   <data name="DBS_TabColDate" xml:space="preserve">
-    <value>Date</value>
+    <value>Datum</value>
   </data>
   <data name="DBS_TabColFileName" xml:space="preserve">
-    <value>File Name</value>
+    <value>Dateiname</value>
   </data>
   <data name="DBS_TabColSize" xml:space="preserve">
-    <value>Size</value>
+    <value>Größe</value>
   </data>
   <data name="DBS_WindowTitle" xml:space="preserve">
-    <value>Database Search &amp; Scan</value>
+    <value>Datenbank Suchen &amp; Scannen</value>
   </data>
   <data name="Main_ButtonLoadDB" xml:space="preserve">
-    <value>Select Chat DB...</value>
+    <value>Wähle Chat DB...</value>
   </data>
   <data name="Main_ButtonSaveChat" xml:space="preserve">
-    <value>Save Chat...</value>
+    <value>Speichere Chat...</value>
   </data>
   <data name="Main_ButtonSeek" xml:space="preserve">
-    <value>Scan Backup...</value>
+    <value>Scanne Backup...</value>
   </data>
   <data name="Main_CTabColChat" xml:space="preserve">
     <value>Chat</value>
   </data>
   <data name="Main_CTabColDate" xml:space="preserve">
-    <value>Date</value>
+    <value>Datum</value>
   </data>
   <data name="Main_CTabColDir" xml:space="preserve">
     <value>&lt;&gt;</value>
   </data>
   <data name="Main_LabelChatPartners" xml:space="preserve">
-    <value>Chat Partners:</value>
+    <value>Chat-Partner:</value>
   </data>
   <data name="Main_LabelChatWith" xml:space="preserve">
-    <value>Chat with:</value>
+    <value>Chat mit:</value>
   </data>
   <data name="Main_LabelYouAre" xml:space="preserve">
-    <value>You are:</value>
+    <value>Du bist:</value>
   </data>
   <data name="Main_PTabCol1st" xml:space="preserve">
-    <value>1st</value>
+    <value>erster</value>
   </data>
   <data name="Main_PTabColID" xml:space="preserve">
     <value>ID</value>
@@ -187,9 +187,9 @@
     <value>Name</value>
   </data>
   <data name="Main_PTabColNum" xml:space="preserve">
-    <value>#</value>
+    <value>Anz.</value>
   </data>
   <data name="Main_RichTextBox" xml:space="preserve">
-    <value>MainWindow</value>
+    <value>MainWindow.de-DE</value>
   </data>
 </root>

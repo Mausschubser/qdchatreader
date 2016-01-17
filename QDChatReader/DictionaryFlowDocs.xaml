@@ -1,0 +1,115 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:QDChatReader">
+
+    <FlowDocument x:Key="MainWindow">
+        <Paragraph>
+            <Run FontWeight="Bold" FontSize="13.333" Text="QD Chat Reader"/>
+            <LineBreak/>
+            <Run FontSize="10.667" Text="Reads the QD chat from a Chat DataBase. "/>
+        </Paragraph>
+        <Paragraph>
+            <Run FontWeight="Bold" FontSize="10.667" Text="1. "/>
+            <Run FontSize="10.667" Text="Choose the database file with"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Select Chat DB...&quot;"/>
+            <Run FontSize="10.667" Text="or let the computer search through the mobile phone back up by"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Scan Backup...&quot;"/>
+            <Run FontSize="10.667" Text="."/>
+            <LineBreak/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="2. "/>
+            <Run FontSize="10.667" Text="Click on the Chat Partner Name to select the chat."/>
+            <LineBreak/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="3. "/>
+            <Run FontSize="10.667" Text="Change the number into the real or nick name in the field"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Chat with:&quot;"/>
+            <Run FontSize="10.667" Text="to remember it."/>
+        </Paragraph>
+    </FlowDocument>
+
+    <FlowDocument x:Key="MainWindow.de-DE">
+        <Paragraph>
+            <Run FontWeight="Bold" FontSize="13.333" Text="QD Chat Reader"/>
+            <LineBreak/>
+            <Run FontSize="10.667" Text="Liest den QD Chat aus einer Datenbank. "/>
+        </Paragraph>
+        <Paragraph>
+            <Run FontWeight="Bold" FontSize="10.667" Text="1. "/>
+            <Run FontSize="10.667" Text="Wähle eine Datenbank Datei mit"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Wähle Chat DB...&quot;"/>
+            <Run FontSize="10.667" Text=" oder lasse den Computer mit"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Scanne Backup...&quot;"/>
+            <Run FontSize="10.667" Text="das Backup deines Mobilgerätes durchsuchen."/>
+            <LineBreak/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="2. "/>
+            <Run FontSize="10.667" Text="Klicke auf den Chatpartner, um dessen Chat anzuzeigen."/>
+            <LineBreak/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="3. "/>
+            <Run FontSize="10.667" Text="Ersetze die Nummer mit dem echten Namen oder Nick durch Überschreiben im Feld"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Chat mit:&quot;"/>
+            <Run FontSize="10.667" Text="."/>
+        </Paragraph>
+    </FlowDocument>
+  
+    <FlowDocument x:Key="DBSeekerWindow">
+        <Paragraph>
+            <Run FontWeight="Bold" FontSize="13.333" Text="Finding the QD Chat Database"/>
+            <LineBreak/>
+            <Run FontSize="10.667" Text="The QD Chat Database will be searched in the backup folder of your mobile phone. "/>
+        </Paragraph>
+        <Paragraph>
+            <Run FontWeight="Bold" FontSize="10.667" Text="1. "/>
+            <Run FontSize="10.667" Text="Make an non-encrypted backup in iTunes. "/>
+            <LineBreak/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="2. "/>
+            <Run FontSize="10.667" Text="Let the &quot;"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="Database scan"/>
+            <Run FontSize="10.667" Text="&quot; find it in the backup folder. "/>
+            <LineBreak/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="3. "/>
+            <Run FontSize="10.667" Text="Pick a found database from the list and click on &quot;"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="Use selected"/>
+            <Run FontSize="10.667" Text="&quot;."/>
+            <Run FontSize="10.667" Text=" Or store it under a new name with &quot;"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="Save as..."/>
+            <Run FontSize="10.667" Text="&quot;."/>
+            <LineBreak/>
+            <Run FontSize="10.667" Text="You may change the search location by &quot;"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="Search in..."/>
+            <Run FontSize="10.667" Text="&quot;"/>
+            <Run FontSize="10.667" Text=" or reset it to the &quot;"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="iTunes default"/>
+            <Run FontSize="10.667" Text="&quot; backup folder."/>
+        </Paragraph>
+    </FlowDocument>
+
+    <FlowDocument x:Key="DBSeekerWindow.de-DE">
+        <Paragraph>
+            <Run FontWeight="Bold" FontSize="13.333" Text="Finde die QD Chat Datenbank"/>
+            <LineBreak/>
+            <Run FontSize="10.667" Text="Die QD Chat Datenbank wird im iTunes Backup-Ordner deines Mobilgerätes gesucht. "/>
+        </Paragraph>
+        <Paragraph>
+            <Run FontWeight="Bold" FontSize="10.667" Text="1. "/>
+            <Run FontSize="10.667" Text="Erstelle ein unverschlüsseltes Backup in iTunes. "/>
+            <LineBreak/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="2. "/>
+            <Run FontSize="10.667" Text="Lasse den "/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Datenbank Scan&quot;"/>
+            <Run FontSize="10.667" Text="die Chat-Datei im Backup-Ordner finden."/>
+            <LineBreak/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="3. "/>
+            <Run FontSize="10.667" Text="Wähle eine gefundene Datenbank aus der Liste und"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Verwende diese&quot;"/>
+            <Run FontSize="10.667" Text=". Speichere sie an einem neuen Ort mit"/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Speichere unter...&quot;"/>
+            <Run FontSize="10.667" Text="."/>
+            <LineBreak/>
+            <Run FontSize="10.667" Text="Du kannst den Suchort mit "/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;Suche in...&quot;"/>
+            <Run FontSize="10.667" Text=" ändern oder auf "/>
+            <Run FontWeight="Bold" FontSize="10.667" Text="&quot;iTunes Standard&quot;"/>
+            <Run FontSize="10.667" Text="zurücksetzen."/>
+        </Paragraph>
+    </FlowDocument>
+
+</ResourceDictionary>

@@ -176,7 +176,7 @@ namespace QDChatReader
                 saveFileDialog.Filter = "database files (*.db)|*.db|all files (*.*)|*.*";
                 saveFileDialog.DefaultExt = "*.db";
                 saveFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(((App)Application.Current).QDChatReaderData.ActiveDBFile);
-                saveFileDialog.FileName = System.IO.Path.GetFileNameWithoutExtension(sourcefile) + "_"+timestring+".db";
+                saveFileDialog.FileName = "QD-Chat_"+timestring+".db";
                 saveFileDialog.ValidateNames = false;
                 if (saveFileDialog.ShowDialog() == true)
                 {
@@ -214,7 +214,7 @@ namespace QDChatReader
                 bgSeekerCancel();
                 ((App)Application.Current).QDChatReaderData.ActiveDBFile = DBFilesList.SelectedFile.name;
                 Console.WriteLine("Datei benutzt: " + DBFilesList.SelectedFile.name);
-                this.Close();
+                // this.Close();
             }
         }
 
@@ -232,16 +232,12 @@ namespace QDChatReader
                         ((App)Application.Current).QDChatReaderData.SelectedDBFile = DBFilesList.SelectedFile.name;
                         Console.WriteLine("Datei gewählt: " + DBFilesList.SelectedFile.name);
                     }
-
                 }
-
             }
             catch (Exception)
             {
             }
         }
-
- 
     }
 
 

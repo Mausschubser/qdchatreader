@@ -16,6 +16,7 @@ namespace QDChatReader
         private string activeDBFile="";
         private string exportFolder="";
         private string myName="";
+        private string culture = "";
 
         #region Properties Getters and Setters
         public string PersonSelected
@@ -54,6 +55,12 @@ namespace QDChatReader
             set { myName = value; OnPropertyChanged("MyName"); }
         }
 
+        public string Culture
+        {
+            get { return culture; }
+            set { culture = value; OnPropertyChanged("Culture"); }
+        }
+
         #endregion
 
         #region Eventhandler
@@ -73,6 +80,7 @@ namespace QDChatReader
             SetDefaultRootFolder();
             SetDefaultExportFolder();
             SetDefaultMyName();
+            SetDefaultSelectedDBFile();
         }
 
         public void SetDefaultRootFolder()
@@ -99,6 +107,11 @@ namespace QDChatReader
             {
                 MyName = "me";
             }
+        }
+
+        public void SetDefaultSelectedDBFile()
+        {
+            SelectedDBFile = "";
         }
     }
 }

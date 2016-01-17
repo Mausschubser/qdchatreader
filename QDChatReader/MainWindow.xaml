@@ -3,9 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:QDChatReader.Properties"
         xmlns:local="clr-namespace:QDChatReader"
         mc:Ignorable="d"
-        Title="QD Chat Reader" Height="640" MinHeight="640" Width="800" MinWidth="480" Loaded="Window_Loaded" Icon="QDChatReader.ico">
+        Title="QD Chat Reader" Height="640" MinHeight="640" Width="860" MinWidth="720" Loaded="Window_Loaded" Icon="QDChatReader.ico">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DictionaryFlowDocs.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,53 +27,44 @@
             <ColumnDefinition MinWidth="200" Width="100*" />
             <ColumnDefinition Width="120"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="seekButton" Content="Scan Backup..." HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="100" Click="seekButton_Click" Height="20" Grid.Column="2" Grid.Row="1"/>
-        <Button x:Name="loadDbButton" Content="Select Chat DB..." HorizontalAlignment="Left" Margin="10,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="loadDbButton_Click" Height="20"/>
-        <Button x:Name="button1" Content="Save Chat..." Margin="10,15,10,0" Grid.Row="3" VerticalAlignment="Top" Click="saveButton_Click" Grid.Column="2" Height="20"/>
+        <Button x:Name="seekButton" Content="{x:Static p:Resources.Main_ButtonSeek}" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Width="100" Click="seekButton_Click" Height="20" Grid.Column="2" Grid.Row="1"/>
+        <Button x:Name="loadDbButton" Content="{x:Static p:Resources.Main_ButtonLoadDB}" HorizontalAlignment="Left" Margin="10,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="loadDbButton_Click" Height="20"/>
+        <Button x:Name="buttonSaveChat" Content="{x:Static p:Resources.Main_ButtonSaveChat}" Margin="10,15,10,0" Grid.Row="3" VerticalAlignment="Top" Click="saveButton_Click" Grid.Column="2" Height="20"/>
         <TextBox x:Name="fileNameLabel" Text="{Binding Path=ActiveDBFile }" Grid.Column="1" Margin="10,10,10,0" Grid.Row="1" VerticalAlignment="Top" Height="30" TextChanged="fileNameLabel_TextChanged" VerticalContentAlignment="Center"/>
-        <Label x:Name="labelNameList" Content="Chat Partners:" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" Width="100" Height="30" VerticalAlignment="Top"/>
+        <Label x:Name="labelNameList" Content="{x:Static p:Resources.Main_LabelChatPartners}" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" Width="100" Height="30" VerticalAlignment="Top"/>
         <DataGrid x:Name="personGridView" Margin="10,40,10,10" Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="False" GotFocus="personGridView_GotFocus" SelectionChanged="personGridView_SelectionChanged" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="Auto" Binding="{Binding Name}" IsReadOnly="True" />
-                <DataGridTextColumn Header="ID" Binding="{Binding ID}" IsReadOnly="True" />
-                <DataGridTextColumn Header="1st" Binding="{Binding 1stContact, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
-                <DataGridTextColumn Header="#" Binding="{Binding Count}" IsReadOnly="True" />
+                <DataGridTextColumn Header="{x:Static p:Resources.Main_PTabColName}" Width="Auto" Binding="{Binding Name}" IsReadOnly="True" />
+                <DataGridTextColumn Header="{x:Static p:Resources.Main_PTabColID}" Binding="{Binding ID}" IsReadOnly="True" />
+                <DataGridTextColumn Header="{x:Static p:Resources.Main_PTabCol1st}" Binding="{Binding 1stContact, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
+                <DataGridTextColumn Header="{x:Static p:Resources.Main_PTabColNum}" Binding="{Binding Count}" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid x:Name="chatGridView" ItemsSource="{Binding}" Margin="10,45,10,10" Grid.Row="3" Grid.ColumnSpan="3" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Datum" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
-                <DataGridTextColumn Header="&lt;&gt;" Width="50" Binding="{Binding Direction}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Chat" Width="*" Binding="{Binding Chat}" IsReadOnly="True" />
+                <DataGridTextColumn Header="{x:Static p:Resources.Main_CTabColDate}" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
+                <DataGridTextColumn Header="{x:Static p:Resources.Main_CTabColDir}" Width="50" Binding="{Binding Direction}" IsReadOnly="True" />
+                <DataGridTextColumn Header="{x:Static p:Resources.Main_CTabColChat}" Width="*" Binding="{Binding Chat}" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
         <GridSplitter x:Name="gridSplitter" Height="5" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="10,0" HorizontalAlignment="Stretch"/>
-        <Label x:Name="label" Content="Chat with:" Height="30" Margin="10,10,40,0" Grid.Row="3" VerticalAlignment="Top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <Label x:Name="labelChatWith" Content="{x:Static p:Resources.Main_LabelChatWith}" Height="30" Margin="10,10,40,0" Grid.Row="3" VerticalAlignment="Top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
         <TextBox x:Name="labelChatList" Text="{Binding PersonSelected}" HorizontalAlignment="Left" Height="30" Margin="85,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2" VerticalContentAlignment="Center"/>
-        <Label x:Name="label1" Content="You are:" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="235,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="85" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+        <Label x:Name="labelYouAre" Content="{x:Static p:Resources.Main_LabelYouAre}" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="235,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="85" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
         <TextBox x:Name="textBoxMe" Text="{Binding MyName}" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="325,10,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" VerticalContentAlignment="Center"/>
-        <RichTextBox x:Name="richTextBox" Height="110" Margin="10,0,70,0" VerticalAlignment="Top" Grid.ColumnSpan="3" BorderThickness="0">
-            <FlowDocument>
-                <Paragraph>
-                    <Run FontWeight="Bold" FontSize="13.333" Text="QD Chat Reader"/>
-                </Paragraph>
-                <Paragraph>
-                    <Run FontSize="10.667" Text="Reads the QD chat from a Chat DataBase. "/>
-                    <Run FontSize="10.667"/>
-                    <LineBreak/>
-                    <Run FontWeight="Bold" FontSize="10.667" Text="1. "/>
-                    <Run FontSize="10.667" Text="Choose the database file with &quot;"/>
-                    <Run FontWeight="Bold" FontSize="10.667" Text="Select Chat DB..."/>
-                    <Run FontSize="10.667" Text="&quot; or let the computer search through the mobile phone back up by &quot;"/>
-                    <Run FontWeight="Bold" FontSize="10.667" Text="Scan Backup..."/>
-                    <Run FontSize="10.667" Text="&quot;."/>
-                    <LineBreak/>
-                    <Run FontWeight="Bold" FontSize="10.667" Text="2. "/>
-                    <Run FontSize="10.667" Text="Click on the Chat Partner Name to select the chat. Change the number into the real or nick name to remember it."/>
-                </Paragraph>
-            </FlowDocument>
+        <RichTextBox x:Name="richTextBox" Document="{StaticResource ResourceKey={x:Static p:Resources.Main_RichTextBox}}" Height="110" Margin="10,0,70,0" VerticalAlignment="Top" Grid.ColumnSpan="3" BorderThickness="0">
         </RichTextBox>
         <Label x:Name="labelVersion" Content="0" Grid.Column="2" Height="20" VerticalAlignment="Top" HorizontalContentAlignment="Center" ContentStringFormat="v{0}" Padding="2" HorizontalAlignment="Right" Width="64" FontSize="10.667" Margin="0,65,0,0" />
         <Image x:Name="image" Grid.Column="2" HorizontalAlignment="Right" Height="64" Margin="0,0,0,0" VerticalAlignment="Top" Width="64" Source="Icons/QDChatReader_64.ico" Stretch="None"/>
+        <Button x:Name="buttonDE" Content="DE" Grid.Column="2" Margin="0,0,10,10" HorizontalAlignment="Right" Width="27" Height="20" VerticalAlignment="Bottom" IsCancel="True" Click="buttonDE_Click" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="Icons/de.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="button" Content="EN" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,42,10" Width="27" Height="20" VerticalAlignment="Bottom" Click="button_Click" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="Icons/gb.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

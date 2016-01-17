@@ -59,5 +59,230 @@ namespace QDChatReader.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop scanning!.
+        /// </summary>
+        public static string DBS_ButtonCancelSeek {
+            get {
+                return ResourceManager.GetString("DBS_ButtonCancelSeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search In....
+        /// </summary>
+        public static string DBS_ButtonRoot {
+            get {
+                return ResourceManager.GetString("DBS_ButtonRoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to iTunes default.
+        /// </summary>
+        public static string DBS_ButtonRootReset {
+            get {
+                return ResourceManager.GetString("DBS_ButtonRootReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use selected.
+        /// </summary>
+        public static string DBS_ButtonSave {
+            get {
+                return ResourceManager.GetString("DBS_ButtonSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as....
+        /// </summary>
+        public static string DBS_ButtonSaveAs {
+            get {
+                return ResourceManager.GetString("DBS_ButtonSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database scan.
+        /// </summary>
+        public static string DBS_ButtonSeek {
+            get {
+                return ResourceManager.GetString("DBS_ButtonSeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DBSeekerWindow.
+        /// </summary>
+        public static string DBS_RichTextBox {
+            get {
+                return ResourceManager.GetString("DBS_RichTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string DBS_TabColDate {
+            get {
+                return ResourceManager.GetString("DBS_TabColDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Name.
+        /// </summary>
+        public static string DBS_TabColFileName {
+            get {
+                return ResourceManager.GetString("DBS_TabColFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size.
+        /// </summary>
+        public static string DBS_TabColSize {
+            get {
+                return ResourceManager.GetString("DBS_TabColSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database Search &amp; Scan.
+        /// </summary>
+        public static string DBS_WindowTitle {
+            get {
+                return ResourceManager.GetString("DBS_WindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Chat DB....
+        /// </summary>
+        public static string Main_ButtonLoadDB {
+            get {
+                return ResourceManager.GetString("Main_ButtonLoadDB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Chat....
+        /// </summary>
+        public static string Main_ButtonSaveChat {
+            get {
+                return ResourceManager.GetString("Main_ButtonSaveChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan Backup....
+        /// </summary>
+        public static string Main_ButtonSeek {
+            get {
+                return ResourceManager.GetString("Main_ButtonSeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string Main_CTabColChat {
+            get {
+                return ResourceManager.GetString("Main_CTabColChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Main_CTabColDate {
+            get {
+                return ResourceManager.GetString("Main_CTabColDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;&gt;.
+        /// </summary>
+        public static string Main_CTabColDir {
+            get {
+                return ResourceManager.GetString("Main_CTabColDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat Partners:.
+        /// </summary>
+        public static string Main_LabelChatPartners {
+            get {
+                return ResourceManager.GetString("Main_LabelChatPartners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat with:.
+        /// </summary>
+        public static string Main_LabelChatWith {
+            get {
+                return ResourceManager.GetString("Main_LabelChatWith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are:.
+        /// </summary>
+        public static string Main_LabelYouAre {
+            get {
+                return ResourceManager.GetString("Main_LabelYouAre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1st.
+        /// </summary>
+        public static string Main_PTabCol1st {
+            get {
+                return ResourceManager.GetString("Main_PTabCol1st", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        public static string Main_PTabColID {
+            get {
+                return ResourceManager.GetString("Main_PTabColID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Main_PTabColName {
+            get {
+                return ResourceManager.GetString("Main_PTabColName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #.
+        /// </summary>
+        public static string Main_PTabColNum {
+            get {
+                return ResourceManager.GetString("Main_PTabColNum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MainWindow.
+        /// </summary>
+        public static string Main_RichTextBox {
+            get {
+                return ResourceManager.GetString("Main_RichTextBox", resourceCulture);
+            }
+        }
     }
 }

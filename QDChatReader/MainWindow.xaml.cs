@@ -221,5 +221,15 @@ namespace QDChatReader
                 }
             }
         }
+
+        private void buttonDE_Click(object sender, RoutedEventArgs e)
+        {
+            App.SetCulture("de-DE",true);
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            App.SetCulture("en", true);
+        }
     }
 }
