@@ -78,7 +78,11 @@ namespace QDChatReader
         {
             OpenFileDialog openDBFileDialog = new OpenFileDialog();
             openDBFileDialog.Filter = "DataBase files (*.db)|*.db|all files (*.*)|*.*";
-            openDBFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(((App)Application.Current).QDChatReaderData.ActiveDBFile);
+            try
+            {
+                openDBFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(((App)Application.Current).QDChatReaderData.ActiveDBFile);
+            }
+            catch (Exception) {}
             if (openDBFileDialog.ShowDialog() == true)
             {
                 string dbFileName = openDBFileDialog.FileName;
