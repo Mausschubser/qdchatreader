@@ -124,6 +124,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DBFile.cs" />
     <Compile Include="DBSeekerWindow.xaml.cs">
       <DependentUpon>DBSeekerWindow.xaml</DependentUpon>
     </Compile>
@@ -152,6 +153,7 @@
       <DependentUpon>QDRessources.resx</DependentUpon>
     </Compile>
     <Compile Include="QDSerializer.cs" />
+    <Compile Include="sqlite.cs" />
     <Page Include="DBSeekerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

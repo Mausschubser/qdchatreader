@@ -20,20 +20,27 @@ namespace QDChatReader
 
         public int ReadFromChatList(List<QDChatLine> qdchatlist)
         {
-            ResetCounter();
-            foreach (QDChatLine chatline in qdchatlist)
+            if (qdchatlist.Count>0)
             {
-                AddPersonToList(chatline.senderid, chatline);
-                AddPersonToList(chatline.receiverid, chatline);
+                ResetCounter();
+                foreach (QDChatLine chatline in qdchatlist)
+                {
+                    AddPersonToList(chatline.senderid, chatline);
+                    AddPersonToList(chatline.receiverid, chatline);
+                }
+                List.Sort(new QDPersonsCountComparer());
+                List[0].isMe = true;
+                Me = List[0];
+                if ((Selected.id == "") && (List.Count > 0))
+                {
+                    Selected = List[1];
+                }
+                return 0;
             }
-            List.Sort(new QDPersonsCountComparer());
-            List[0].isMe = true;
-            Me = List[0];
-            if ((Selected.id == "") && (List.Count > 0))
+            else
             {
-                Selected = List[1];
+                return -1;
             }
-            return 0;
         }
 
         public int GetPersonIndexFromId(string id)

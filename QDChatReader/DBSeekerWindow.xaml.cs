@@ -59,7 +59,7 @@ namespace QDChatReader
             int percentage = 0;
             string statustext = "";
             DateTime timestamp = DateTime.Now; ;
-            foreach (DBFiles.DBFile file in DBFilesList.FileList)
+            foreach (DBFile file in DBFilesList.FileList)
             {
                 if ((worker.CancellationPending == true))
                 {
@@ -68,7 +68,7 @@ namespace QDChatReader
                 }
                 else
                 {
-                    if (DBFilesList.FileValidate(file.name))
+                    if (file.IsValidChatDB(file.name))
                     {   //gültiges file gefunden.
                         DBFilesList.ValidFileList.Add(file);
                         AddValidFileTable(validFileTable, file);
@@ -123,13 +123,13 @@ namespace QDChatReader
         private void FillValidFileTable(DataTable fileTable)
         {
             fileTable.Clear();
-            foreach (DBFiles.DBFile file in DBFilesList.ValidFileList)
+            foreach (DBFile file in DBFilesList.ValidFileList)
             {
                 AddValidFileTable(fileTable, file);
             }
         }
 
-        private void AddValidFileTable(DataTable fileTable, DBFiles.DBFile file)
+        private void AddValidFileTable(DataTable fileTable, DBFile file)
         {
             DataRow nextRow = fileTable.NewRow();
             nextRow["File"] = file.name;

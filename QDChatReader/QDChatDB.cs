@@ -45,29 +45,37 @@ namespace QDChatReader
 
         public int ReadChat(List<QDChatLine> qdchatlist)
         {
-            qdchatlist.Clear();
             string sql = "select ZSENTDATE, ZTO, ZFROM, ZTEXT from ZQFMESSAGE";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
-            SQLiteDataReader reader = command.ExecuteReader();
-            Console.WriteLine("start");
-            this._entries = 0;
-            while (reader.Read())
+            try
             {
-                QDChatLine chatentry = new QDChatLine();
-                chatentry.senderid = reader["ZFROM"].ToString();
-                chatentry.receiverid = reader["ZTO"].ToString();
-                chatentry.chattext = reader["ZTEXT"].ToString();
-                chatentry.timeoffset = reader.GetDouble(0);
-                chatentry.ConvertRawField();
-                qdchatlist.Add(chatentry);
-                this._entries++;
+                SQLiteDataReader reader = command.ExecuteReader();
+                Console.WriteLine("start");
+                qdchatlist.Clear();
+                this._entries = 0;
+                while (reader.Read())
+                {
+                    QDChatLine chatentry = new QDChatLine();
+                    chatentry.senderid = reader["ZFROM"].ToString();
+                    chatentry.receiverid = reader["ZTO"].ToString();
+                    chatentry.chattext = reader["ZTEXT"].ToString();
+                    chatentry.timeoffset = reader.GetDouble(0);
+                    chatentry.ConvertRawField();
+                    qdchatlist.Add(chatentry);
+                    this._entries++;
 
-                //               Console.WriteLine(" " + _entries + "date:" + chatentry.timestamp + "\tfrom: " + chatentry.sendername + "\t" + chatentry.chattext);
+                    //               Console.WriteLine(" " + _entries + "date:" + chatentry.timestamp + "\tfrom: " + chatentry.sendername + "\t" + chatentry.chattext);
+                }
+                Console.WriteLine("sortieren anfang");
+                qdchatlist.Sort(new QDChatComparer());
+                Console.WriteLine("sortieren fertig");
+                return 0;
             }
-            Console.WriteLine("sortieren anfang");
-            qdchatlist.Sort(new QDChatComparer());
-            Console.WriteLine("sortieren fertig");
-            return 0;
+            catch (Exception)
+            {
+                qdchatlist.Clear();
+            }
+            return -1;
         }
 
         public void Close()
