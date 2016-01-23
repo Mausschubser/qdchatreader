@@ -150,6 +150,9 @@
   <data name="DBS_WindowTitle" xml:space="preserve">
     <value>Database Search &amp; Scan</value>
   </data>
+  <data name="DlgSearchITunes" xml:space="preserve">
+    <value>Where is your iTunes backup?</value>
+  </data>
   <data name="Main_ButtonLoadDB" xml:space="preserve">
     <value>Select Chat DB...</value>
   </data>
@@ -191,5 +194,26 @@
   </data>
   <data name="Main_RichTextBox" xml:space="preserve">
     <value>MainWindow</value>
+  </data>
+  <data name="openDBDialogFilter" xml:space="preserve">
+    <value>DataBase files (*.db)|*.db|all files (*.*)|*.*</value>
+  </data>
+  <data name="saveDBDialogFilter" xml:space="preserve">
+    <value>DataBase files (*.db)|*.db|all files (*.*)|*.*</value>
+  </data>
+  <data name="saveFileDialogFilter" xml:space="preserve">
+    <value>text (*.txt)|*.txt|Excel (*.xlsx)|*.xlsx|all files (*.*)|*.*</value>
+  </data>
+  <data name="StatusBarCollectingFiles" xml:space="preserve">
+    <value>collecting files from the root folder...</value>
+  </data>
+  <data name="StatusBarDone" xml:space="preserve">
+    <value>done.</value>
+  </data>
+  <data name="Main_PTabColLast" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="Main_PTabColLength" xml:space="preserve">
+    <value>Length</value>
   </data>
 </root>

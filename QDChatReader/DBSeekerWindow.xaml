@@ -6,18 +6,18 @@
         xmlns:p="clr-namespace:QDChatReader.Properties"
         xmlns:local="clr-namespace:QDChatReader"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.DBS_WindowTitle}" Height="520" Width="800" MinWidth="760" MinHeight="480" Icon="QDChatReader.ico">
+        Title="{x:Static p:Resources.DBS_WindowTitle}" Height="527" Width="800" MinWidth="760" MinHeight="480" Icon="QDChatReader.ico">
     <Window.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="DictionaryFlowDocs.xaml"></ResourceDictionary>
-                </ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DictionaryFlowDocs.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
             <local:FileSizeConverter x:Key="filesizeconverter" />
         </ResourceDictionary>
     </Window.Resources>
     <DockPanel>
-        <StatusBar DockPanel.Dock="Bottom" Height="20">
-            <StatusBarItem Height="20" VerticalAlignment="Bottom">
+        <StatusBar DockPanel.Dock="Bottom" Height="24">
+            <StatusBarItem Height="24" VerticalAlignment="Bottom">
                 <TextBlock x:Name="toolStripStatusLabel" />
             </StatusBarItem>
         </StatusBar>
@@ -45,9 +45,9 @@
             <ProgressBar x:Name="progressBarSeek" Grid.Column="1" Height="20" Margin="10,10,10,0" Grid.Row="2" VerticalAlignment="Top"/>
             <DataGrid x:Name="gridViewFileList" ItemsSource="{Binding validFileTable}"  Grid.ColumnSpan="3" Margin="10" Grid.Row="4" GotFocus="gridViewFileList_GotFocus" AutoGenerateColumns="False" EnableRowVirtualization="False" CanUserAddRows="False" CanUserDeleteRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{x:Static p:Resources.DBS_TabColDate}" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="{x:Static p:Resources.DBS_TabColSize}" Width="50" Binding="{Binding Size, Converter={StaticResource filesizeconverter}}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="{x:Static p:Resources.DBS_TabColFileName}" Width="*" Binding="{Binding File}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="{x:Static p:Resources.DBS_TabColDate}" Width="120" Binding="{Binding Date, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" IsReadOnly="True" CanUserReorder="False" />
+                    <DataGridTextColumn Header="{x:Static p:Resources.DBS_TabColSize}" Width="50" Binding="{Binding Size, Converter={StaticResource filesizeconverter}}" IsReadOnly="True" CanUserReorder="False" />
+                    <DataGridTextColumn Header="{x:Static p:Resources.DBS_TabColFileName}" Width="*" Binding="{Binding File}" IsReadOnly="True" CanUserReorder="False" />
                 </DataGrid.Columns>
 
             </DataGrid>

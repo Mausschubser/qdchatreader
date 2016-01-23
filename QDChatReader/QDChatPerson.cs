@@ -12,6 +12,8 @@ namespace QDChatReader
         public string name = "";
         public int count = 0;
         public DateTime firstAppearance;
+        public DateTime lastAppearance;
+        public int numberOfLines=0;
         public bool isMe = false;
     }
 }

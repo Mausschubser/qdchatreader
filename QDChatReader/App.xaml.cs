@@ -37,7 +37,7 @@ namespace QDChatReader
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             System.Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            Version=String.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
+            Version=String.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
             qdChatReader = QDChatReaderSerializer.DeserializeFromXML() as QDChatReaderClass;
             qdChatReader.Init();
             MainWindow mainWindow = new MainWindow();
@@ -67,16 +67,16 @@ namespace QDChatReader
 
             if (closeAllWindowsReloadMain)
             {
-                Type mainWinType = App.Current.Windows[0].GetType();
-                Window mainForm = Assembly.GetExecutingAssembly().CreateInstance(mainWinType.FullName) as Window;
-                mainForm.Show();
+                //                Type mainWinType = App.Current.Windows[0].GetType();
+                //                Window mainForm = Assembly.GetExecutingAssembly().CreateInstance(mainWinType.FullName) as Window;
+                Window mainForm = Assembly.GetExecutingAssembly().CreateInstance("QDChatReader.MainWindow") as Window; 
                 // close all other windows
                 foreach (Window win in App.Current.Windows)
                 {
-                    if (mainForm == win)
-                        continue;
-                    win.Close();
+                    if (mainForm == win) continue;
+                    win.Hide();
                 }
+                mainForm.Show();
             }
         }
 

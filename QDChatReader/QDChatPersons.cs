@@ -12,21 +12,22 @@ namespace QDChatReader
         public QDChatPerson Selected = new QDChatPerson();
         public List<QDChatPerson> List = new List<QDChatPerson>();
         public const int INDEXNOTFOUND= -1;
+        public enum direction { sender, receiver};
         
         public bool isMe(QDChatPerson person)
         {
             return (person.id == Me.id);
         }
 
-        public int ReadFromChatList(List<QDChatLine> qdchatlist)
+        public int ReadFromChatList(QDChatList qdchatlist)
         {
             if (qdchatlist.Count>0)
             {
                 ResetCounter();
                 foreach (QDChatLine chatline in qdchatlist)
                 {
-                    AddPersonToList(chatline.senderid, chatline);
-                    AddPersonToList(chatline.receiverid, chatline);
+                    AddPersonToList(chatline.senderid, chatline, direction.sender);
+                    AddPersonToList(chatline.receiverid, chatline, direction.receiver);
                 }
                 List.Sort(new QDPersonsCountComparer());
                 List[0].isMe = true;
@@ -84,25 +85,37 @@ namespace QDChatReader
             foreach (QDChatPerson person in List)
             {
                 person.count = 0;
+                person.numberOfLines = 0;
             }
         }
 
-        private int AddPersonToList(string personid, QDChatLine chatline)
+        private int AddPersonToList(string personid, QDChatLine chatline, direction direction) 
         {
             int personindex = INDEXNOTFOUND;
             personindex = List.FindIndex(x => personid == x.id);
-            if (personindex == INDEXNOTFOUND)       //new name ID added, it wasnot found in the list
+            if (personindex == INDEXNOTFOUND)       //new name ID added, it was not found in the list
             {
                 QDChatPerson newperson = new QDChatPerson();
                 newperson.id = personid;
                 newperson.name = personid;
                 newperson.count = 1;
                 newperson.firstAppearance = chatline.timestamp;
+                newperson.lastAppearance = newperson.firstAppearance;
+                newperson.numberOfLines = chatline.NumberOfLines;
                 List.Add(newperson);
             }
             else
             {
                 List[personindex].count++;
+                if (List[personindex].firstAppearance > chatline.timestamp)
+                {
+                    List[personindex].firstAppearance = chatline.timestamp;
+                }
+                if (List[personindex].lastAppearance < chatline.timestamp)
+                {
+                    List[personindex].lastAppearance = chatline.timestamp;
+                }
+                List[personindex].numberOfLines+= chatline.NumberOfLines;
             }
             return personindex;
         }

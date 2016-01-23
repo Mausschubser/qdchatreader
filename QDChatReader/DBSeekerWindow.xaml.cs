@@ -51,7 +51,7 @@ namespace QDChatReader
         private void bgSeeker_DoWork(object sender, DoWorkEventArgs e)
         {
             var worker = sender as BackgroundWorker;
-            toolStripStatusLabel.Dispatcher.Invoke(new UpdateStatusLabelDelegate(UpdateStatusLabel), new object[] { "collecting files from the root folder..." });
+            toolStripStatusLabel.Dispatcher.Invoke(new UpdateStatusLabelDelegate(UpdateStatusLabel), new object[] { QDChatReader.Properties.Resources.StatusBarCollectingFiles });
             DBFilesList.SeekAll(((App)Application.Current).QDChatReaderData.RootFolder);
             //Console.WriteLine("start validating...");
             int totalfilescount = DBFilesList.FileList.Count;
@@ -101,7 +101,7 @@ namespace QDChatReader
         {
             int percent = 100;
             progressBarSeek.Dispatcher.Invoke(new UpdateProgressBarSeekDelegate(UpdateProgressBarSeek), new object[] { percent });
-            toolStripStatusLabel.Dispatcher.Invoke(new UpdateStatusLabelDelegate(UpdateStatusLabel), new object[] { "done."});
+            toolStripStatusLabel.Dispatcher.Invoke(new UpdateStatusLabelDelegate(UpdateStatusLabel), new object[] { QDChatReader.Properties.Resources.StatusBarDone});
         }
 
         private void bgSeekerCancel()
@@ -142,6 +142,8 @@ namespace QDChatReader
         {
             var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             folderBrowserDialog.SelectedPath = ((App)Application.Current).QDChatReaderData.RootFolder;
+            folderBrowserDialog.ShowNewFolderButton = false;
+            folderBrowserDialog.Description = QDChatReader.Properties.Resources.DlgSearchITunes;
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 ((App)Application.Current).QDChatReaderData.RootFolder = folderBrowserDialog.SelectedPath;
@@ -173,7 +175,7 @@ namespace QDChatReader
                 DateTime timestamp = info.CreationTime;
                 string timestring = timestamp.ToString("yyyy-MM-dd_HH-mm");
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "database files (*.db)|*.db|all files (*.*)|*.*";
+                saveFileDialog.Filter = QDChatReader.Properties.Resources.saveDBDialogFilter;  //"database files (*.db)|*.db|all files (*.*)|*.*";
                 saveFileDialog.DefaultExt = "*.db";
                 saveFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(((App)Application.Current).QDChatReaderData.ActiveDBFile);
                 saveFileDialog.FileName = "QD-Chat_"+timestring+".db";
@@ -181,10 +183,6 @@ namespace QDChatReader
                 if (saveFileDialog.ShowDialog() == true)
                 {
                     newfilename = saveFileDialog.FileName;
-                    if (File.Exists(newfilename))
-                    {
-                        //TODO: Overwrite?
-                    }
                     try
                     {
                         File.Copy(sourcefile, newfilename,true);
@@ -194,9 +192,7 @@ namespace QDChatReader
                             this.Close();
                         }
                     }
-                    catch 
-                    {
-                    }
+                    catch { }
                 }
             }
         }

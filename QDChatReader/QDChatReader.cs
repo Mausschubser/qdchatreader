@@ -17,6 +17,7 @@ namespace QDChatReader
         private string exportFolder="";
         private string myName="";
         private string culture = "";
+        private double displaySizeInch = 4.0;
 
         #region Properties Getters and Setters
         public string PersonSelected
@@ -61,6 +62,16 @@ namespace QDChatReader
             set { culture = value; OnPropertyChanged("Culture"); }
         }
 
+        public double DisplaySizeInch
+        {
+            get { return displaySizeInch;}
+            set
+            {
+                displaySizeInch = value>0.0?value:displaySizeInch;
+                ChatLengthConverter.DisplaySizeInch = displaySizeInch;
+            }
+        }
+
         #endregion
 
         #region Eventhandler
@@ -78,6 +89,7 @@ namespace QDChatReader
         public void Init()
         {
             InitDefaultRootFolder();
+            InitDefaulLinesToLength();
             SetDefaultExportFolder();
             SetDefaultMyName();
             SetDefaultSelectedDBFile();
@@ -96,6 +108,12 @@ namespace QDChatReader
             {
                 SetDefaultRootFolder();
             }
+        }
+
+        public void InitDefaulLinesToLength()
+        {
+            if (DisplaySizeInch<=0.0)
+            { DisplaySizeInch = 4.0; }
         }
 
         public void SetDefaultExportFolder()

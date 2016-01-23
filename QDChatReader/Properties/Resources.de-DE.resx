@@ -150,6 +150,9 @@
   <data name="DBS_WindowTitle" xml:space="preserve">
     <value>Datenbank Suchen &amp; Scannen</value>
   </data>
+  <data name="DlgSearchITunes" xml:space="preserve">
+    <value>Wo ist dein iTunes Backup?</value>
+  </data>
   <data name="Main_ButtonLoadDB" xml:space="preserve">
     <value>Wähle Chat DB...</value>
   </data>
@@ -191,5 +194,26 @@
   </data>
   <data name="Main_RichTextBox" xml:space="preserve">
     <value>MainWindow.de-DE</value>
+  </data>
+  <data name="openDBDialogFilter" xml:space="preserve">
+    <value>Datenbank Dateien (*.db)|*.db|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="saveDBDialogFilter" xml:space="preserve">
+    <value>Datenbank Dateien (*.db)|*.db|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="saveFileDialogFilter" xml:space="preserve">
+    <value>Text (*.txt)|*.txt|Excel (*.xlsx)|*.xlsx|Alle Dateien(*.*)|*.*</value>
+  </data>
+  <data name="StatusBarCollectingFiles" xml:space="preserve">
+    <value>Sammle Datei-Informationen im Backup Ordner...</value>
+  </data>
+  <data name="StatusBarDone" xml:space="preserve">
+    <value>fertig.</value>
+  </data>
+  <data name="Main_PTabColLast" xml:space="preserve">
+    <value>letzter</value>
+  </data>
+  <data name="Main_PTabColLength" xml:space="preserve">
+    <value>Länge</value>
   </data>
 </root>

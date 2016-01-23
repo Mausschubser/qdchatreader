@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QDChatReader
 {
-    public class QDChatDataTable : DataTable
+    public class QDChatDataTable : DataTable 
     {
         public void Init()
         {
@@ -17,6 +17,11 @@ namespace QDChatReader
             Locale = System.Globalization.CultureInfo.InvariantCulture;
         }
 
+/*        public QDChatDataTable Copy()
+        {
+
+        }
+*/
         public void FillFromChatByPerson(QDChatList qdchat, QDChatPersons qdpersons)
         {
             if (this.Columns.Count < 1)
@@ -30,7 +35,7 @@ namespace QDChatReader
                 {
                     DataRow workRow = this.NewRow();
                     workRow["Date"] = chatline.timestamp.ToString();
-                    workRow["Direction"] = ((chatline.chatdirection == 1) ? "<" : ">");
+                    workRow["Direction"] = ((chatline.chatdirection == 1) ? "OUT" : "IN");
                     workRow["Chat"] = chatline.chattext;
                     this.Rows.Add(workRow);
                 }

@@ -29,8 +29,8 @@
     <ProductName>QD Chat Reader</ProductName>
     <PublisherName>Mausschubser</PublisherName>
     <SuiteName>HimbeeryaSoft</SuiteName>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.2.%2a</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -124,6 +124,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChatLengthConverter.cs" />
     <Compile Include="DBFile.cs" />
     <Compile Include="DBSeekerWindow.xaml.cs">
       <DependentUpon>DBSeekerWindow.xaml</DependentUpon>
@@ -144,6 +145,9 @@
     <Compile Include="QDChatPerson.cs" />
     <Compile Include="QDChatPersons.cs" />
     <Compile Include="QDChatReader.cs" />
+    <Compile Include="QDChatWindow.xaml.cs">
+      <DependentUpon>QDChatWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="QDPersonDataTable.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -175,6 +179,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="QDChatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

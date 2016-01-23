@@ -160,6 +160,15 @@ namespace QDChatReader.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Where is your iTunes backup?.
+        /// </summary>
+        public static string DlgSearchITunes {
+            get {
+                return ResourceManager.GetString("DlgSearchITunes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Chat DB....
         /// </summary>
         public static string Main_ButtonLoadDB {
@@ -259,6 +268,24 @@ namespace QDChatReader.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last.
+        /// </summary>
+        public static string Main_PTabColLast {
+            get {
+                return ResourceManager.GetString("Main_PTabColLast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Length.
+        /// </summary>
+        public static string Main_PTabColLength {
+            get {
+                return ResourceManager.GetString("Main_PTabColLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Main_PTabColName {
@@ -282,6 +309,51 @@ namespace QDChatReader.Properties {
         public static string Main_RichTextBox {
             get {
                 return ResourceManager.GetString("Main_RichTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DataBase files (*.db)|*.db|all files (*.*)|*.*.
+        /// </summary>
+        public static string openDBDialogFilter {
+            get {
+                return ResourceManager.GetString("openDBDialogFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DataBase files (*.db)|*.db|all files (*.*)|*.*.
+        /// </summary>
+        public static string saveDBDialogFilter {
+            get {
+                return ResourceManager.GetString("saveDBDialogFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to text (*.txt)|*.txt|Excel (*.xlsx)|*.xlsx|all files (*.*)|*.*.
+        /// </summary>
+        public static string saveFileDialogFilter {
+            get {
+                return ResourceManager.GetString("saveFileDialogFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to collecting files from the root folder....
+        /// </summary>
+        public static string StatusBarCollectingFiles {
+            get {
+                return ResourceManager.GetString("StatusBarCollectingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to done..
+        /// </summary>
+        public static string StatusBarDone {
+            get {
+                return ResourceManager.GetString("StatusBarDone", resourceCulture);
             }
         }
     }

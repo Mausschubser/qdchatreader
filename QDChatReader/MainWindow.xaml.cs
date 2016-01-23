@@ -31,6 +31,8 @@ namespace QDChatReader
         QDPersonDataTable PersonTable = new QDPersonDataTable();
         QDChatDataTable ChatTable = new QDChatDataTable();
         QDSerializer personSerializer = new QDSerializer(QDPersons, "QDPersons.xml");
+        QDChatWindow ChatWindow = new QDChatWindow();
+
         private string selectedNameID= "";
 
         public MainWindow()
@@ -43,8 +45,17 @@ namespace QDChatReader
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             personGridView.ItemsSource = PersonTable.AsDataView();
-            chatGridView.ItemsSource = ChatTable.AsDataView();
             labelVersion.Content = ((App)Application.Current).Version;
+            ChatWindow.ChatTable = ChatTable;
+            ChatWindow.Show();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (ChatWindow.IsLoaded)
+            {
+                ChatWindow.Close();
+            }
         }
 
         private void UpdateChatTableFromNewRow(string newID)
@@ -77,7 +88,7 @@ namespace QDChatReader
         private void loadDbButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openDBFileDialog = new OpenFileDialog();
-            openDBFileDialog.Filter = "DataBase files (*.db)|*.db|all files (*.*)|*.*";
+            openDBFileDialog.Filter = QDChatReader.Properties.Resources.openDBDialogFilter;
             try
             {
                 openDBFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(((App)Application.Current).QDChatReaderData.ActiveDBFile);
@@ -178,7 +189,7 @@ namespace QDChatReader
                 Console.WriteLine("name="+chatpartner);
                 chatpartner =chatpartner.Trim(System.IO.Path.GetInvalidFileNameChars());
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "text (*.txt)|*.txt|Excel (*.xlsx)|*.xlsx|all files (*.*)|*.*";
+                saveFileDialog.Filter = QDChatReader.Properties.Resources.saveFileDialogFilter; // "text (*.txt)|*.txt|Excel (*.xlsx)|*.xlsx|all files (*.*)|*.*";
                 saveFileDialog.DefaultExt = "*.txt";
                 saveFileDialog.InitialDirectory = ((App)Application.Current).QDChatReaderData.ExportFolder;
                 saveFileDialog.FileName = "QDChat "+chatpartner+".txt";
@@ -235,5 +246,6 @@ namespace QDChatReader
         {
             App.SetCulture("en", true);
         }
+
     }
 }

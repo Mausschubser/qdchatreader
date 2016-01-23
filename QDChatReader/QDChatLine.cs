@@ -14,11 +14,21 @@ namespace QDChatReader
         public double timeoffset = 0.0;
         public DateTime timestamp;
         public int chatdirection = IN;
+        private int numberOfLines=0;
 
         private DateTime basetime = new DateTime(2001, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         public const int IN = 0;
         public const int OUT = 1;
 
+        public int NumberOfLines
+        {
+            get
+            {
+                numberOfLines = (chattext.Length / 20) + 1;
+                return numberOfLines;
+            }
+        }
+ 
         public int ConvertRawField()
         {
             this.timestamp = basetime.AddSeconds(this.timeoffset);
