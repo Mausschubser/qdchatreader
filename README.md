@@ -11,9 +11,9 @@ Liebe QD Gemeinde! Das wichtigste an unserem Lieblingsspiel sind nicht Punkte od
 Und da hat sich bei vielen ordentlich was angehäuft. 
 Mit diesem kleinen Programm könnt ihr den QD Chat aus eurem Mobilgerät auf dem PC anzeigen und abspeichern.
 
-Eine **Beschreibung** findet ihr oben unter **[DOCUMENTATION](https://github.com/Mausschubser/qdchatreaderdocumentation)**.
+Eine **Beschreibung** findet ihr oben unter **[DOCUMENTATION](https://github.com/Mausschubser/qdchatreader/docs/documentation)**.
 
-Für den **Download** folgt ihr rechts der dicken **[DOWNLOAD](https://github.com/Mausschubser/qdchatreader/releases)** Schaltfläche.
+Für den **Download** folgt ihr rechts der dicken **[DOWNLOAD](https://github.com/Mausschubser/qdchatreader/docs/releases)** Schaltfläche.
 
 Viel Spaß und auf noch viele nette Chats.
 
@@ -22,9 +22,9 @@ Viel Spaß und auf noch viele nette Chats.
 The most important thing with our favorite game is not the scoring or leaderboard, but the chat.
 This program allows you to read the chat from your mobile device and store it to your PC.
 
-A **description** is here: **[DOCUMENTATION](https://github.com/Mausschubser/qdchatreader/documentation)**.
+A **description** is here: **[DOCUMENTATION](https://github.com/Mausschubser/qdchatreader/docs/documentation)**.
 
-For **download** click here: **[DOWNLOAD](https://github.com/Mausschubser/qdchatreader/releases)**.
+For **download** click here: **[DOWNLOAD](https://github.com/Mausschubser/qdchatreader/docs/releases)**.
 
 Enjoy and have fun.
 
