@@ -30,7 +30,7 @@ Enjoy and have fun.
 
 
 
-[» DISCLAIMER]https://github.com/Mausschubser/qdchatreader/wikipage?title=Disclaimer)
+[» DISCLAIMER](https://github.com/Mausschubser/qdchatreader/wikipage?title=Disclaimer)
 [» ABOUT](https://github.com/Mausschubser/qdchatreader/wikipage?title=About)
 >![](Home_1537580)
 (c) 2016 by Mausschubser, a _HimbeeryaSoft_ production presented by _starker Mann_.
